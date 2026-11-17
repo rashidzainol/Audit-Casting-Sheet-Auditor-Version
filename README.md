@@ -1,115 +1,108 @@
 # Audit Casting Sheet — Auditor Version
 
-A comprehensive web-based financial statement casting tool designed for auditors to efficiently verify and reconcile financial statements with automatic calculations, validation checks, and professional reporting capabilities.
+A browser-based financial statement casting and reconciliation tool for auditors. Verify totals, cross-check reported figures, and produce professional summaries — entirely offline, with no installation required.
 
-## Features
+![Audit Casting Sheet](screenshots/09-summary.png)
 
-### 📊 Financial Statement Categories
-- **Non-Current Assets**: Property, Plant & Equipment, Investments, Intangible Assets, etc.
-- **Current Assets**: Cash & Bank, Receivables, Inventories, Prepayments, etc.
-- **Non-Current Liabilities**: Long-term loans, Deferred tax, Provisions, etc.
-- **Current Liabilities**: Trade payables, Short-term borrowings, Accruals, etc.
-- **Equity/Net Assets**: Accumulated surplus, Reserves, Contributed capital, etc.
-- **Income & Expenses**: Revenue, Other income, Operating expenses, Finance costs
+## ✨ Key Features
 
-### 🔍 Audit & Validation Features
-- **Automatic Casting Checks**: Real-time validation against reported figures
-- **Tolerance-based Matching**: Configurable tolerance levels for amount matching
-- **Status Indicators**: Visual indicators (✓/✗) for reconciliation status
-- **Financial Ratios**: Current ratio, Debt-to-asset ratio, Net asset ratio
-- **Quick Casting View**: High-level overview for rapid assessment
+- **Multi-category casting**: Non-current/current assets, liabilities, equity, income & expenses.
+- **Automatic validation**: Real-time casting checks against reported figures with configurable tolerance.
+- **Financial ratios**: Current ratio, debt-to-asset ratio, net asset ratio.
+- **Multiple reporting standards**: MFRS, MPERS, MPSAS, Cash / Modified Cash (terminology & categories adapt).
+- **Data management**: Auto-save to browser storage, JSON export/import, CSV export/import.
+- **Themes**: Professional, Calm, Happy, Dark — with good contrast.
+- **Bilingual UI**: English (ENG) and Bahasa Malaysia (MY).
+- **Print-ready**: Professional report printing.
+- **Offline-capable**: No server, no dependencies, all data stays on your device.
 
-### 💾 Data Management
-- **Local Storage**: Automatic saving to browser storage
-- **JSON Export/Import**: Full session backup and restore capabilities
-- **CSV Export/Import**: Compatible with spreadsheet applications
-- **Session Management**: Track creation and modification dates
-- **Print Functionality**: Professional report printing
+## 📸 Screenshots
 
-### 🎨 User Experience
-- **Multiple Themes**: Professional, Calm, Happy, and Dark modes
-- **Responsive Design**: Works on desktop and mobile devices
-- **Real-time Updates**: Instant calculations and status updates
-- **Keyboard Shortcuts**: Enter key to quickly add entries
-- **Notification System**: User feedback for all actions
+### Non-Current Assets
+![Non-Current Assets](screenshots/02-noncurrent.png)
 
-## Usage
+### Current Assets
+![Current Assets](screenshots/03-current.png)
 
-### Adding Entries
-1. Select the appropriate financial category tab
-2. Choose the specific account category from the dropdown
-3. Enter the amount and press Enter or click elsewhere to add
-4. Use Edit/Delete buttons to modify existing entries
+### Non-Current Liabilities
+![Non-Current Liabilities](screenshots/04-ncl.png)
 
-### Validation & Reconciliation
-1. Enter reported amounts in the "Reported" input fields
-2. System automatically checks against calculated totals
-3. Green checkmark (✓) indicates matching within tolerance
-4. Red cross (✗) indicates mismatch with difference shown
+### Current Liabilities
+![Current Liabilities](screenshots/05-cl.png)
 
-### Data Management
-- **Save Session**: Export complete session as JSON file
-- **Load Session**: Import previously saved session
-- **Export CSV**: Create spreadsheet-compatible export
-- **Clear All**: Reset all data (with confirmation)
+### Equity / Net Assets
+![Equity](screenshots/06-equity.png)
 
-### Reporting
-- **Summary Tab**: Comprehensive financial overview
-- **Multiple Views**: All categories, Assets only, Liabilities only, Equity only, Quick casting
-- **Financial Metrics**: Key ratios and performance indicators
-- **Print-ready**: Professional formatting for reports
+### Income & Expenses
+![Income & Expenses](screenshots/07-pnl.png)
 
-## Technical Features
+### Accounting Standards Guide
+![Accounting Standards](screenshots/08-standards.png)
 
-- **Client-side Processing**: All calculations done in browser
-- **No External Dependencies**: Pure HTML, CSS, and JavaScript
-- **Cross-browser Compatible**: Works on modern browsers
-- **Offline Capable**: Functions without internet connection
-- **Data Privacy**: All data remains on your device
+### Summary & Metrics
+![Summary](screenshots/09-summary.png)
 
-## Browser Compatibility
+## 🚀 Quick Start
 
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
+1. Download `Audit Casting Sheet.html` (or the release ZIP).
+2. Open it in any modern browser (Chrome, Edge, Firefox, Safari).
+3. Select a reporting standard, enter figures, and start casting.
 
-## Installation
+No build step, no server, no account.
 
-No installation required! Simply:
-1. Download the `Audit Casting Sheet.html` file
-2. Open it in any modern web browser
-3. Start using immediately
+## 📊 Usage
 
-## Data Structure
+- **Adding entries**: Select a category, enter the amount, press Enter.
+- **Editing**: Click **Edit** on a row, update the amount.
+- **Deleting**: Click **Del** and confirm.
+- **Reconciliation**: Enter reported totals in the "Reported" fields; status shows ✓ Match or ✗ Mismatch with difference.
+- **Casting check**: In Summary, enter Reported Total Assets and click **Check Casting**.
+- **Save/Load**: Use ⚙️ Settings → 💾 Save Session / 📂 Load Session (JSON).
+- **Export/Import CSV**: Use 📤 / 📥 for spreadsheet compatibility.
+- **Print**: Use 🖨️ for a professional report.
 
-The application maintains data in six main categories:
-- `nc`: Non-Current Assets
-- `c`: Current Assets  
-- `ncl`: Non-Current Liabilities
-- `cl`: Current Liabilities
-- `eq`: Equity/Net Assets
-- `pl`: Income & Expenses (Profit & Loss)
+## 📐 Supported Reporting Standards
 
-## Customization
+| Standard | Sector | Basis | Complexity |
+|---|---|---|---|
+| MFRS | Corporate (public) | Full accrual | High |
+| MPERS | Private entities | Full accrual | Medium |
+| MPSAS | Public sector | Full accrual | High |
+| Cash / Modified Cash | Small entities, clubs | Cash / modified | Low |
 
-### Tolerance Settings
-Modify `settings.tolerancePct` in the code to adjust matching tolerance (default: 0.5%)
+Terminology and available components adapt when you switch standards. See the **Accounting Standards** panel for a detailed guide and component comparison.
 
-### Themes
-Four built-in themes available:
-- **Professional**: Corporate blue theme
-- **Calm**: Soothing blue tones
-- **Happy**: Warm yellow theme
-- **Dark**: Dark mode for reduced eye strain
+## 💾 Data & Privacy
 
-### Currency Support
-Pre-configured for RM (Malaysian Ringgit) with support for MYR, USD, SGD
+- All data is stored in your browser (localStorage) and can be exported as JSON/CSV.
+- Nothing is sent to any server. Your financial data stays on your device.
+- Recommended: export JSON backups regularly.
 
-## License
+## 🛠️ Tech Stack
+
+- Pure HTML, CSS, and JavaScript (single file).
+- No external dependencies, no build tools.
+- Offline-first; works on desktop, tablet, and mobile.
+
+## 📚 References
+
+- Malaysian Accounting Standards Board (MASB) — MFRS & MPERS: https://www.masb.org.my
+- Jabatan Akauntan Negara Malaysia (JANM) — MPSAS: https://www.anm.gov.my
+- Malaysian Institute of Accountants (MIA): https://www.mia.org.my
+- IPSAS (International Public Sector Accounting Standards): https://www.ipsasb.org
+- IFRS Foundation: https://www.ifrs.org
+
+## 📦 Release
+
+Download the latest release ZIP from the **Releases** page. It contains:
+- `Audit Casting Sheet.html` — the application
+- `screenshots/` — preview images
+- `README.md` — this document
+
+## 📄 License
 
 This project is open source and available under the MIT License.
 
 ---
 
-**Note**: This is a client-side application. All financial data remains on your local device. Regular exports are recommended for backup purposes. For critical audit work, always verify results against original source documents.
+**Note**: This is a client-side tool. Always verify results against original source documents for critical audit work.

@@ -5,30 +5,43 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Audit Casting Sheet — Auditor Version</title>
 <style>
-  :root{ 
-    --bg:#f5f7fb; 
-    --panel:#fff; 
-    --accent:#2b3a67; 
-    --accent2:#1f2b4a; 
-    --text:#111827; 
+  :root{
+    --bg:#f5f7fb;
+    --panel:#ffffff;
+    --panel-2:#f1f5f9;
+    --accent:#2b3a67;
+    --accent-2:#1f2b4a;
+    --text:#111827;
     --muted:#6b7280;
     --success:#10b981;
     --warning:#f59e0b;
     --error:#ef4444;
     --border:#e5e7eb;
-    --shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+    --shadow:0 4px 6px -1px rgba(0,0,0,0.08),0 2px 4px -1px rgba(0,0,0,0.04);
+    --input-bg:#ffffff;
+    --table-head-bg:#f1f5f9;
+    --table-head-text:#2b3a67;
+    --stat-bg:#fbfbff;
+    --quick-bg:#ffffff;
+    --chart-bg:#ffffff;
+    --placeholder-bg:#f1f5f9;
+    --secondary-btn-bg:#f1f5f9;
+    --secondary-btn-hover:#e2e8f0;
   }
-  
+
+  *{box-sizing:border-box}
   body{
-    font-family:Inter,Arial,Helvetica,sans-serif;
+    font-family:Inter,system-ui,-apple-system,'Segoe UI',Arial,Helvetica,sans-serif;
     margin:0;
     background:var(--bg);
     color:var(--text);
-    line-height:1.5;
+    line-height:1.6;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
   }
-  
+
   header{
-    background:var(--accent);
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
     color:#fff;
     padding:14px;
     text-align:center;
@@ -37,13 +50,14 @@
     z-index:100;
     box-shadow:0 2px 4px rgba(0,0,0,0.1);
   }
-  
+
   .wrap{
-    max-width:1100px;
+    max-width:1200px;
     margin:18px auto;
-    padding:0 16px;
+    padding:0 20px;
   }
-  
+  @media (max-width:720px){ .wrap{ padding:0 12px; margin:12px auto; } }
+
   .tabs{
     display:flex;
     gap:4px;
@@ -54,97 +68,74 @@
     border-radius:8px;
     box-shadow:var(--shadow);
   }
-  
+
   .tab{
     flex:1;
     text-align:center;
     padding:12px 8px;
-    background:#f8fafc;
+    background:var(--panel-2);
     color:var(--text);
     cursor:pointer;
-    border-radius:6px;
+    border-radius:8px;
     border:1px solid var(--border);
     transition:all 0.2s ease;
     font-weight:500;
     min-width:120px;
   }
-  
-  .tab:hover{
-    background:#f1f5f9;
-  }
-  
-  .tab.active{
-    background:var(--accent);
-    color:#fff;
-    border-color:var(--accent);
-  }
-  
+
+  .tab:hover{ background:var(--secondary-btn-hover); }
+  .tab.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .tab:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
   .panel{
     background:var(--panel);
-    padding:20px;
-    border-radius:8px;
+    padding:22px;
+    border-radius:12px;
     box-shadow:var(--shadow);
     margin-bottom:20px;
-  }
-  
-  .panel h3{
-    margin-top:0;
-    margin-bottom:16px;
-    color:var(--accent);
-    font-size:1.25rem;
-  }
-  
-  .row{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-bottom:16px;
-  }
-  
-  input[type=number],select,input[type=text]{
-    padding:10px 12px;
     border:1px solid var(--border);
-    border-radius:6px;
-    font-size:0.95rem;
-    transition:border-color 0.2s ease;
   }
-  
+
+  .panel h3{ margin-top:0; margin-bottom:16px; color:var(--accent); font-size:1.25rem; }
+
+  .row{ display:flex; gap:12px; align-items:center; margin-bottom:16px; }
+
+  input[type=number],select,input[type=text]{
+    padding:12px 14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    font-size:1rem;
+    min-height:44px;
+    background:var(--input-bg);
+    color:var(--text);
+    font-variant-numeric:tabular-nums;
+    transition:border-color 0.2s ease, box-shadow 0.2s ease;
+  }
   input[type=number]:focus,select:focus,input[type=text]:focus{
     outline:none;
     border-color:var(--accent);
     box-shadow:0 0 0 3px rgba(43, 58, 103, 0.1);
   }
-  
+
   button{
-    padding:10px 14px;
-    border-radius:6px;
+    padding:12px 16px;
+    border-radius:10px;
     border:none;
     background:var(--accent);
     color:#fff;
     cursor:pointer;
     font-weight:500;
+    font-size:0.95rem;
+    min-height:44px;
     transition:all 0.2s ease;
   }
-  
-  button:hover{
-    background:var(--accent2);
-    transform:translateY(-1px);
-  }
-  
-  button:active{
-    transform:translateY(0);
-  }
-  
-  button.secondary{
-    background:#f1f5f9;
-    color:var(--text);
-    border:1px solid var(--border);
-  }
-  
-  button.secondary:hover{
-    background:#e2e8f0;
-  }
-  
+  button:hover{ background:var(--accent-2); transform:translateY(-1px); }
+  button:active{ transform:translateY(0); }
+  button:disabled{ opacity:0.5; cursor:not-allowed; transform:none; }
+  button.secondary{ background:var(--secondary-btn-bg); color:var(--text); border:1px solid var(--border); }
+  button.secondary:hover{ background:var(--secondary-btn-hover); }
+  button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
   table{
     width:100%;
     border-collapse:collapse;
@@ -153,271 +144,114 @@
     overflow:hidden;
     box-shadow:0 1px 3px rgba(0,0,0,0.05);
   }
-  
-  th,td{
-    border:1px solid var(--border);
-    padding:12px;
-    text-align:right;
-  }
-  
-  th{
-    background:#f8fafc;
-    text-align:left;
-    font-weight:600;
-    color:var(--accent);
-  }
-  
-  td.left{
-    text-align:left;
-  }
-  
-  .actions{
-    display:flex;
-    gap:6px;
-    justify-content:center;
-  }
-  
-  .small-btn{
-    padding:6px 10px;
-    border-radius:6px;
-    border:none;
-    cursor:pointer;
-    font-size:0.85rem;
-    transition:all 0.2s ease;
-  }
-  
-  .edit{
-    background:#fff;
-    color:var(--accent);
-    border:1px solid var(--accent);
-  }
-  
-  .edit:hover{
-    background:var(--accent);
-    color:#fff;
-  }
-  
-  .del{
-    background:#fff;
-    color:var(--error);
-    border:1px solid var(--error);
-  }
-  
-  .del:hover{
-    background:var(--error);
-    color:#fff;
-  }
-  
-  .summary-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-top:16px;
-  }
-  
-  .stat{
-    padding:16px;
-    border-radius:6px;
-    background:#fbfbff;
-    border:1px solid #eef;
-    box-shadow:0 1px 2px rgba(0,0,0,0.05);
-  }
-  
-  .stat h4{
-    margin-top:0;
-    margin-bottom:12px;
-    color:var(--accent);
-    border-bottom:1px solid var(--border);
-    padding-bottom:8px;
-  }
-  
-  footer{
-    margin:24px 0;
-    text-align:center;
-    color:var(--muted);
-    font-size:0.9rem;
-  }
-  
-  .credit{
-    user-select:none;
-    -webkit-user-select:none;
-    pointer-events:none;
-  }
-  
-  .quick-box{
-    padding:16px;
-    border-radius:8px;
-    background:#fff;
-    border:1px solid var(--border);
-    margin-top:16px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.05);
-  }
-  
-  .ok{
-    color:var(--success);
-    font-weight:600;
-  }
-  
-  .warn{
-    color:var(--warning);
-    font-weight:600;
-  }
-  
-  .err{
-    color:var(--error);
-    font-weight:600;
-  }
-  
-  .profit{
-    color:var(--success);
-    font-weight:600;
-  }
-  
-  .loss{
-    color:var(--error);
-    font-weight:600;
-  }
-  
-  .toolbar{
-    display:flex;
-    gap:8px;
-    align-items:center;
-    margin-bottom:16px;
-    flex-wrap:wrap;
-  }
-  
-  .status-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    padding:4px 8px;
-    border-radius:4px;
-    font-size:0.85rem;
-    font-weight:500;
-  }
-  
-  .status-ok{
-    background:rgba(16, 185, 129, 0.1);
-    color:var(--success);
-  }
-  
-  .status-warn{
-    background:rgba(245, 158, 11, 0.1);
-    color:var(--warning);
-  }
-  
-  .status-error{
-    background:rgba(239, 68, 68, 0.1);
-    color:var(--error);
-  }
-  
-  .chart-container{
-    margin-top:20px;
-    background:#fff;
-    border-radius:8px;
-    padding:16px;
-    box-shadow:var(--shadow);
-  }
-  
-  .chart-placeholder{
-    height:200px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f8fafc;
-    border-radius:6px;
-    color:var(--muted);
-    font-style:italic;
-  }
-  
-  .help-text{
-    color:var(--muted);
-    font-size:0.9rem;
-    margin-top:8px;
-  }
-  
-  .input-group{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-    margin-bottom:12px;
-  }
-  
-  .input-group label{
-    font-weight:500;
-    color:var(--accent);
-  }
-  
+  th,td{ border:1px solid var(--border); padding:12px; text-align:right; font-variant-numeric:tabular-nums; }
+  th{ background:var(--table-head-bg); text-align:left; font-weight:600; color:var(--table-head-text); }
+  td.left{ text-align:left; }
+
+  .actions{ display:flex; gap:6px; justify-content:center; }
+  .small-btn{ padding:6px 10px; border-radius:6px; border:none; cursor:pointer; font-size:0.85rem; transition:all 0.2s ease; }
+  .edit{ background:var(--input-bg); color:var(--accent); border:1px solid var(--accent); }
+  .edit:hover{ background:var(--accent); color:#fff; }
+  .del{ background:var(--input-bg); color:var(--error); border:1px solid var(--error); }
+  .del:hover{ background:var(--error); color:#fff; }
+
+  .summary-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  .stat{ padding:16px; border-radius:10px; background:var(--stat-bg); border:1px solid var(--border); box-shadow:0 1px 2px rgba(0,0,0,0.05); }
+  .stat h4{ margin-top:0; margin-bottom:12px; color:var(--accent); border-bottom:1px solid var(--border); padding-bottom:8px; }
+
+  footer{ margin:24px 0; text-align:center; color:var(--muted); font-size:0.9rem; }
+  .credit{ user-select:none; -webkit-user-select:none; pointer-events:none; }
+
+  .quick-box{ padding:16px; border-radius:10px; background:var(--quick-bg); border:1px solid var(--border); margin-top:16px; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+  .ok{ color:var(--success); font-weight:600; }
+  .warn{ color:var(--warning); font-weight:600; }
+  .err{ color:var(--error); font-weight:600; }
+  .profit{ color:var(--success); font-weight:600; }
+  .loss{ color:var(--error); font-weight:600; }
+
+  .toolbar{ display:flex; gap:8px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+  .status-badge{ display:inline-flex; align-items:center; gap:4px; padding:4px 8px; border-radius:4px; font-size:0.85rem; font-weight:500; }
+  .status-ok{ background:rgba(16, 185, 129, 0.1); color:var(--success); }
+  .status-warn{ background:rgba(245, 158, 11, 0.1); color:var(--warning); }
+  .status-error{ background:rgba(239, 68, 68, 0.1); color:var(--error); }
+
+  .chart-container{ margin-top:20px; background:var(--chart-bg); border-radius:10px; padding:16px; box-shadow:var(--shadow); border:1px solid var(--border); }
+  .chart-placeholder{ height:200px; display:flex; align-items:center; justify-content:center; background:var(--placeholder-bg); border-radius:8px; color:var(--muted); font-style:italic; }
+
+  .help-text{ color:var(--muted); font-size:0.9rem; margin-top:8px; }
+  .input-group{ display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
+  .input-group label{ font-weight:500; color:var(--accent); }
+  .empty-row td{ text-align:center; color:var(--muted); font-style:italic; }
+
   @media (max-width:720px){
-    .summary-grid{
-      grid-template-columns:1fr;
-    }
-    
-    .row{
-      flex-direction:column;
-      align-items:stretch;
-    }
-    
-    .tabs{
-      flex-direction:column;
-    }
-    
-    .tab{
-      min-width:auto;
-    }
-    
-    .toolbar{
-      flex-direction:column;
-      align-items:stretch;
-    }
-    
-    .toolbar label{
-      margin-left:0;
-      margin-top:8px;
-    }
+    .summary-grid{ grid-template-columns:1fr; }
+    .row{ flex-direction:column; align-items:stretch; }
+    .tabs{ flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:6px; }
+    .tab{ min-width:140px; flex:0 0 auto; padding:10px 12px; font-size:0.9rem; }
+    .toolbar{ flex-direction:column; align-items:stretch; gap:10px; }
+    .toolbar label{ margin-left:0; margin-top:0; }
+    .toolbar button{ width:100%; }
+    table{ font-size:0.9rem; }
+    th,td{ padding:8px 10px; }
   }
-  
+
+  @media (min-width:721px) and (max-width:1024px){
+    .summary-grid{ grid-template-columns:1fr 1fr; }
+    .tab{ min-width:110px; font-size:0.9rem; }
+  }
+
   @media print{
-    .tabs,button,input,select{
-      display:none!important;
-    }
-    
-    header{
-      background:#fff;
-      color:#000;
-    }
-    
-    .panel{
-      box-shadow:none;
-      border:1px solid #ddd;
-    }
+    .tabs,button,input,select,.toolbar{ display:none!important; }
+    header{ background:#fff; color:#000; }
+    .panel{ box-shadow:none; border:1px solid #ddd; }
+    canvas{ display:none; }
   }
 </style>
 </head>
 <body>
-<header><h1>Audit Casting Sheet — Auditor Version</h1></header>
+<header style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 20px">
+  <h1 style="margin:0;font-size:1.3rem">Audit Casting Sheet — Auditor Version</h1>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <button id="btnStandards" class="secondary" style="padding:6px 10px;font-size:0.85rem">Accounting Standards ℹ️</button>
+    <button id="btnSettings" class="secondary" style="padding:6px 10px;font-size:0.85rem" title="Settings">⚙️</button>
+  </div>
+</header>
+<div id="settingsPanel" class="panel" style="display:none;padding:12px 20px;margin:0 0 12px 0">
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+    <label>Theme: <select id="themeSelect"><option value="professional">Professional</option><option value="calm">Calm</option><option value="happy">Happy</option><option value="dark">Dark</option></select></label>
+    <label>Standard: <select id="standardSelect"><option value="MFRS">MFRS</option><option value="MPERS">MPERS</option><option value="MPSAS">MPSAS</option><option value="CASH">Cash / Modified Cash</option></select></label>
+    <span>Lang:</span>
+    <button id="btnLangEn" class="secondary" style="padding:4px 8px;font-size:0.85rem;font-family:'Segoe UI Emoji','Apple Color Emoji',sans-serif">🇬🇧 EN</button>
+    <button id="btnLangMy" class="secondary" style="padding:4px 8px;font-size:0.85rem;font-family:'Segoe UI Emoji','Apple Color Emoji',sans-serif">🇲🇾 MY</button>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <button id="btnSave" title="Save Session" aria-label="Save Session">💾</button>
+    <button id="btnLoad" title="Load Session" aria-label="Load Session">📂</button>
+    <button id="btnUndo" class="secondary" disabled title="Undo" aria-label="Undo">↩️</button>
+    <button id="btnRedo" class="secondary" disabled title="Redo" aria-label="Redo">↪️</button>
+    <button id="btnClear" class="secondary" title="Clear All" aria-label="Clear All">🗑️</button>
+    <button id="btnExportCSV" title="Export CSV" aria-label="Export CSV">📤</button>
+    <button id="btnImportCSV" title="Import CSV" aria-label="Import CSV">📥</button>
+    <button id="btnCheckCast" title="Check Casting" aria-label="Check Casting">✅</button>
+    <button id="btnPrint" title="Print" aria-label="Print">🖨️</button>
+  </div>
+</div>
 <div class="wrap">
-  <div class="tabs">
-    <div class="tab active" id="tabNonCurrent">Non-Current Assets</div>
-    <div class="tab" id="tabCurrent">Current Assets</div>
-    <div class="tab" id="tabNonCurrentLiab">Non-Current Liabilities</div>
-    <div class="tab" id="tabCurrentLiab">Current Liabilities</div>
-    <div class="tab" id="tabEquity">Equity / Net Assets</div>
-    <div class="tab" id="tabPnl">Income & Expenses</div>
-    <div class="tab" id="tabSummary">Summary</div>
+  <div class="tabs" role="tablist" aria-label="Financial categories">
+    <div class="tab active" id="tabNonCurrent" role="tab" aria-selected="true" aria-controls="panelNonCurrent">Non-Current Assets</div>
+    <div class="tab" id="tabCurrent" role="tab" aria-selected="false" aria-controls="panelCurrent">Current Assets</div>
+    <div class="tab" id="tabNonCurrentLiab" role="tab" aria-selected="false" aria-controls="panelNonCurrentLiab">Non-Current Liabilities</div>
+    <div class="tab" id="tabCurrentLiab" role="tab" aria-selected="false" aria-controls="panelCurrentLiab">Current Liabilities</div>
+    <div class="tab" id="tabEquity" role="tab" aria-selected="false" aria-controls="panelEquity">Equity / Net Assets</div>
+    <div class="tab" id="tabPnl" role="tab" aria-selected="false" aria-controls="panelPnl">Income & Expenses</div>
+    <div class="tab" id="tabStandards" role="tab" aria-selected="false" aria-controls="panelStandards" style="display:none">Accounting Standards</div>
+    <div class="tab" id="tabSummary" role="tab" aria-selected="false" aria-controls="panelSummary">Summary</div>
   </div>
 
-  <div class="toolbar">
-    <button id="btnSave">Save Session as JSON</button>
-    <button id="btnLoad">Load Session from JSON</button>
-    <button id="btnClear" class="secondary">Clear All</button>
-    <button id="btnExportCSV">Export CSV</button>
-    <button id="btnImportCSV">Import CSV</button>
-    <label style="margin-left:auto">Theme: <select id="themeSelect"><option value="professional">Professional</option><option value="calm">Calm</option><option value="happy">Happy</option><option value="dark">Dark</option></select></label>
-  </div>
+
 
   <!-- Non-current assets -->
-  <div class="panel" id="panelNonCurrent">
+  <div class="panel" id="panelNonCurrent" role="tabpanel">
     <h3>Non-Current Assets</h3>
     <p class="help-text">Select a category, enter the amount, and press Enter to add</p>
     <div class="row" style="margin-bottom:16px">
@@ -436,40 +270,23 @@
       </div>
       <div class="input-group" style="width:220px">
         <label for="ncAmount">Amount</label>
-        <input type="number" id="ncAmount" placeholder="Enter amount" />
+        <input type="text" inputmode="decimal" id="ncAmount" placeholder="Enter amount" />
       </div>
     </div>
     <div style="overflow:auto;max-height:320px">
       <table id="ncTable">
-        <thead>
-          <tr>
-            <th class="left">Category</th>
-            <th>Amount</th>
-            <th>Rounded (mil)</th>
-            <th style="width:120px">Action</th>
-          </tr>
-        </thead>
+        <thead><tr><th class="left">Category</th><th>Amount</th><th>Rounded (mil)</th><th style="width:120px">Action</th></tr></thead>
         <tbody></tbody>
         <tfoot>
-          <tr>
-            <td class="left"><strong>Total Non-Current Assets</strong></td>
-            <td id="totalNc">RM 0.00</td>
-            <td id="totalNcM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="left">Reported Total Non-Current Assets</td>
-            <td><input type="number" id="reportedNc" style="width:120px" /></td>
-            <td id="statusNc"></td>
-            <td></td>
-          </tr>
+          <tr><td class="left"><strong>Total Non-Current Assets</strong></td><td id="totalNc">RM 0.00</td><td id="totalNcM">0.00 m</td><td></td></tr>
+          <tr><td class="left">Reported Total Non-Current Assets</td><td><input type="text" inputmode="decimal" id="reportedNc" style="width:120px" /></td><td id="statusNc"></td><td></td></tr>
         </tfoot>
       </table>
     </div>
   </div>
 
   <!-- Current assets -->
-  <div class="panel" id="panelCurrent" style="display:none">
+  <div class="panel" id="panelCurrent" style="display:none" role="tabpanel">
     <h3>Current Assets</h3>
     <p class="help-text">Select a category, enter the amount, and press Enter to add</p>
     <div class="row" style="margin-bottom:16px">
@@ -487,40 +304,23 @@
       </div>
       <div class="input-group" style="width:220px">
         <label for="cAmount">Amount</label>
-        <input type="number" id="cAmount" placeholder="Enter amount" />
+        <input type="text" inputmode="decimal" id="cAmount" placeholder="Enter amount" />
       </div>
     </div>
     <div style="overflow:auto;max-height:320px">
       <table id="cTable">
-        <thead>
-          <tr>
-            <th class="left">Category</th>
-            <th>Amount</th>
-            <th>Rounded (mil)</th>
-            <th style="width:120px">Action</th>
-          </tr>
-        </thead>
+        <thead><tr><th class="left">Category</th><th>Amount</th><th>Rounded (mil)</th><th style="width:120px">Action</th></tr></thead>
         <tbody></tbody>
         <tfoot>
-          <tr>
-            <td class="left"><strong>Total Current Assets</strong></td>
-            <td id="totalC">RM 0.00</td>
-            <td id="totalCM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="left">Reported Total Current Assets</td>
-            <td><input type="number" id="reportedC" style="width:120px" /></td>
-            <td id="statusC"></td>
-            <td></td>
-          </tr>
+          <tr><td class="left"><strong>Total Current Assets</strong></td><td id="totalC">RM 0.00</td><td id="totalCM">0.00 m</td><td></td></tr>
+          <tr><td class="left">Reported Total Current Assets</td><td><input type="text" inputmode="decimal" id="reportedC" style="width:120px" /></td><td id="statusC"></td><td></td></tr>
         </tfoot>
       </table>
     </div>
   </div>
 
   <!-- Non-current liabilities -->
-  <div class="panel" id="panelNonCurrentLiab" style="display:none">
+  <div class="panel" id="panelNonCurrentLiab" style="display:none" role="tabpanel">
     <h3>Non-Current Liabilities</h3>
     <p class="help-text">Select a category, enter the amount, and press Enter to add</p>
     <div class="row" style="margin-bottom:16px">
@@ -537,40 +337,23 @@
       </div>
       <div class="input-group" style="width:220px">
         <label for="nclAmount">Amount</label>
-        <input type="number" id="nclAmount" placeholder="Enter amount" />
+        <input type="text" inputmode="decimal" id="nclAmount" placeholder="Enter amount" />
       </div>
     </div>
     <div style="overflow:auto;max-height:320px">
       <table id="nclTable">
-        <thead>
-          <tr>
-            <th class="left">Category</th>
-            <th>Amount</th>
-            <th>Rounded (mil)</th>
-            <th style="width:120px">Action</th>
-          </tr>
-        </thead>
+        <thead><tr><th class="left">Category</th><th>Amount</th><th>Rounded (mil)</th><th style="width:120px">Action</th></tr></thead>
         <tbody></tbody>
         <tfoot>
-          <tr>
-            <td class="left"><strong>Total Non-Current Liabilities</strong></td>
-            <td id="totalNcl">RM 0.00</td>
-            <td id="totalNclM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="left">Reported Total Non-Current Liabilities</td>
-            <td><input type="number" id="reportedNcl" style="width:120px" /></td>
-            <td id="statusNcl"></td>
-            <td></td>
-          </tr>
+          <tr><td class="left"><strong>Total Non-Current Liabilities</strong></td><td id="totalNcl">RM 0.00</td><td id="totalNclM">0.00 m</td><td></td></tr>
+          <tr><td class="left">Reported Total Non-Current Liabilities</td><td><input type="text" inputmode="decimal" id="reportedNcl" style="width:120px" /></td><td id="statusNcl"></td><td></td></tr>
         </tfoot>
       </table>
     </div>
   </div>
 
   <!-- Current liabilities -->
-  <div class="panel" id="panelCurrentLiab" style="display:none">
+  <div class="panel" id="panelCurrentLiab" style="display:none" role="tabpanel">
     <h3>Current Liabilities</h3>
     <p class="help-text">Select a category, enter the amount, and press Enter to add</p>
     <div class="row" style="margin-bottom:16px">
@@ -588,40 +371,23 @@
       </div>
       <div class="input-group" style="width:220px">
         <label for="clAmount">Amount</label>
-        <input type="number" id="clAmount" placeholder="Enter amount" />
+        <input type="text" inputmode="decimal" id="clAmount" placeholder="Enter amount" />
       </div>
     </div>
     <div style="overflow:auto;max-height:320px">
       <table id="clTable">
-        <thead>
-          <tr>
-            <th class="left">Category</th>
-            <th>Amount</th>
-            <th>Rounded (mil)</th>
-            <th style="width:120px">Action</th>
-          </tr>
-        </thead>
+        <thead><tr><th class="left">Category</th><th>Amount</th><th>Rounded (mil)</th><th style="width:120px">Action</th></tr></thead>
         <tbody></tbody>
         <tfoot>
-          <tr>
-            <td class="left"><strong>Total Current Liabilities</strong></td>
-            <td id="totalCl">RM 0.00</td>
-            <td id="totalClM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="left">Reported Total Current Liabilities</td>
-            <td><input type="number" id="reportedCl" style="width:120px" /></td>
-            <td id="statusCl"></td>
-            <td></td>
-          </tr>
+          <tr><td class="left"><strong>Total Current Liabilities</strong></td><td id="totalCl">RM 0.00</td><td id="totalClM">0.00 m</td><td></td></tr>
+          <tr><td class="left">Reported Total Current Liabilities</td><td><input type="text" inputmode="decimal" id="reportedCl" style="width:120px" /></td><td id="statusCl"></td><td></td></tr>
         </tfoot>
       </table>
     </div>
   </div>
 
   <!-- Equity -->
-  <div class="panel" id="panelEquity" style="display:none">
+  <div class="panel" id="panelEquity" style="display:none" role="tabpanel">
     <h3>Equity / Net Assets</h3>
     <p class="help-text">Select a category, enter the amount, and press Enter to add</p>
     <div class="row" style="margin-bottom:16px">
@@ -637,40 +403,23 @@
       </div>
       <div class="input-group" style="width:220px">
         <label for="eqAmount">Amount</label>
-        <input type="number" id="eqAmount" placeholder="Enter amount" />
+        <input type="text" inputmode="decimal" id="eqAmount" placeholder="Enter amount" />
       </div>
     </div>
     <div style="overflow:auto;max-height:320px">
       <table id="eqTable">
-        <thead>
-          <tr>
-            <th class="left">Category</th>
-            <th>Amount</th>
-            <th>Rounded (mil)</th>
-            <th style="width:120px">Action</th>
-          </tr>
-        </thead>
+        <thead><tr><th class="left">Category</th><th>Amount</th><th>Rounded (mil)</th><th style="width:120px">Action</th></tr></thead>
         <tbody></tbody>
         <tfoot>
-          <tr>
-            <td class="left"><strong>Total Equity</strong></td>
-            <td id="totalEq">RM 0.00</td>
-            <td id="totalEqM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="left">Reported Total Equity</td>
-            <td><input type="number" id="reportedEq" style="width:120px" /></td>
-            <td id="statusEq"></td>
-            <td></td>
-          </tr>
+          <tr><td class="left"><strong>Total Equity</strong></td><td id="totalEq">RM 0.00</td><td id="totalEqM">0.00 m</td><td></td></tr>
+          <tr><td class="left">Reported Total Equity</td><td><input type="text" inputmode="decimal" id="reportedEq" style="width:120px" /></td><td id="statusEq"></td><td></td></tr>
         </tfoot>
       </table>
     </div>
   </div>
 
   <!-- P&L -->
-  <div class="panel" id="panelPnl" style="display:none">
+  <div class="panel" id="panelPnl" style="display:none" role="tabpanel">
     <h3>Income & Expenses</h3>
     <p class="help-text">Select a category, enter the amount, and press Enter to add. Expenses should be entered as positive numbers.</p>
     <div class="row" style="margin-bottom:16px">
@@ -685,57 +434,138 @@
       </div>
       <div class="input-group" style="width:220px">
         <label for="plAmount">Amount</label>
-        <input type="number" id="plAmount" placeholder="Enter amount" />
+        <input type="text" inputmode="decimal" id="plAmount" placeholder="Enter amount" />
       </div>
     </div>
     <div style="overflow:auto;max-height:320px">
       <table id="plTable">
-        <thead>
-          <tr>
-            <th class="left">Category</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Rounded (mil)</th>
-            <th style="width:120px">Action</th>
-          </tr>
-        </thead>
+        <thead><tr><th class="left">Category</th><th>Type</th><th>Amount</th><th>Rounded (mil)</th><th style="width:120px">Action</th></tr></thead>
         <tbody></tbody>
         <tfoot>
-          <tr>
-            <td class="left"><strong>Total Income</strong></td>
-            <td></td>
-            <td id="totalIncome">RM 0.00</td>
-            <td id="totalIncomeM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="left"><strong>Total Expenses</strong></td>
-            <td></td>
-            <td id="totalExpenses">RM 0.00</td>
-            <td id="totalExpensesM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr style="background:#f8fafc">
-            <td class="left"><strong>Net Profit/(Loss)</strong></td>
-            <td></td>
-            <td id="netProfitLoss">RM 0.00</td>
-            <td id="netProfitLossM">0.00 m</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="left">Reported Net Profit/(Loss)</td>
-            <td></td>
-            <td><input type="number" id="reportedPl" style="width:120px" /></td>
-            <td id="statusPl"></td>
-            <td></td>
-          </tr>
+          <tr><td class="left"><strong>Total Income</strong></td><td></td><td id="totalIncome">RM 0.00</td><td id="totalIncomeM">0.00 m</td><td></td></tr>
+          <tr><td class="left"><strong>Total Expenses</strong></td><td></td><td id="totalExpenses">RM 0.00</td><td id="totalExpensesM">0.00 m</td><td></td></tr>
+          <tr style="background:var(--panel-2)"><td class="left"><strong>Net Profit/(Loss)</strong></td><td></td><td id="netProfitLoss">RM 0.00</td><td id="netProfitLossM">0.00 m</td><td></td></tr>
+          <tr><td class="left">Reported Net Profit/(Loss)</td><td></td><td><input type="text" inputmode="decimal" id="reportedPl" style="width:120px" /></td><td id="statusPl"></td><td></td></tr>
         </tfoot>
       </table>
     </div>
   </div>
 
+  <!-- Standards Info -->
+  <div class="panel" id="panelStandards" style="display:none" role="tabpanel">
+    <h3>Accounting Standards — Quick Guide</h3>
+    <p class="help-text">Pilih standard yang sesuai dengan entiti yang diaudit. Klik pada standard untuk lompat ke seksyen.</p>
+
+    <div class="toolbar" style="margin-bottom:12px">
+      <button class="secondary" onclick="document.getElementById('secMFRS').scrollIntoView({behavior:'smooth',block:'start'})">MFRS</button>
+      <button class="secondary" onclick="document.getElementById('secMPERS').scrollIntoView({behavior:'smooth',block:'start'})">MPERS</button>
+      <button class="secondary" onclick="document.getElementById('secMPSAS').scrollIntoView({behavior:'smooth',block:'start'})">MPSAS</button>
+      <button class="secondary" onclick="document.getElementById('secCASH').scrollIntoView({behavior:'smooth',block:'start'})">Cash / Modified</button>
+      <button class="secondary" onclick="document.getElementById('secCompare').scrollIntoView({behavior:'smooth',block:'start'})">Perbandingan</button>
+      <button class="secondary" onclick="document.getElementById('secComponents').scrollIntoView({behavior:'smooth',block:'start'})">Komponen</button>
+    </div>
+
+    <div id="secMFRS" class="stat" style="margin-bottom:12px">
+      <h4>MFRS — Malaysian Financial Reporting Standards</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Syarikat/entiti besar yang patuh IFRS. Komprehensif: pengiktirafan aset/tanggungan, nilai saksama, pendedahan penuh.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Penyata: Kedudukan Kewangan, Prestasi, Aliran Tunai, Perubahan Ekuiti</li>
+        <li>Aset & liabiliti: semasa / bukan semasa</li>
+        <li>Sesuai: audit korporat & entiti awam tersenarai</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.masb.org.my" target="_blank" rel="noopener">MASB (MFRS)</a></p>
+    </div>
+
+    <div id="secMPERS" class="stat" style="margin-bottom:12px">
+      <h4>MPERS — Malaysian Private Entity Reporting Standard</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Entiti persendirian kecil/sederhana. Lebih ringkas daripada MFRS.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Struktur penyata lebih ringkas</li>
+        <li>Beberapa pengecualian/pilihan pengukuran</li>
+        <li>Sesuai: SME & entiti tidak tersenarai</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.masb.org.my" target="_blank" rel="noopener">MASB (MPERS)</a></p>
+    </div>
+
+    <div id="secMPSAS" class="stat" style="margin-bottom:12px">
+      <h4>MPSAS — Malaysian Public Sector Accounting Standards</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Sektor awam (kerajaan, PBT, agensi). Berasaskan IPSAS.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Terminologi: Surplus/(Deficit), Net Assets/Equity</li>
+        <li>Aset infrastruktur, geran, aset warisan</li>
+        <li>Sesuai: audit kerajaan & badan berkanun</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.anm.gov.my" target="_blank" rel="noopener">JANM (MPSAS)</a></p>
+    </div>
+
+    <div id="secCASH" class="stat" style="margin-bottom:12px">
+      <h4>Cash / Modified Cash</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Asas tunai: transaksi direkod bila tunai diterima/dibayar. Modified cash tambah pelarasan akrual terpilih.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Tiada akrual penuh; fokus resit & bayaran</li>
+        <li>Sesuai: entiti kecil, kelab, persatuan</li>
+        <li>Lebih mudah tetapi kurang komprehensif</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.mia.org.my" target="_blank" rel="noopener">MIA (Cash Basis)</a></p>
+    </div>
+
+    <div id="secComponents" class="chart-container" style="margin-bottom:12px">
+      <h4>Perbezaan Komponen dalam App (mengikut standard)</h4>
+      <p class="help-text" style="margin-bottom:8px">Tanda ✓ bermaksud komponen tersedia dalam dropdown standard tersebut.</p>
+      <div style="overflow:auto">
+      <table>
+        <thead><tr><th class="left">Komponen</th><th>MFRS</th><th>MPERS</th><th>MPSAS</th><th>Cash</th></tr></thead>
+        <tbody>
+          <tr><td class="left">PPE</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Investment Property / Long-term Inv.</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Intangible assets</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Right-of-use assets</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Biological assets</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Deferred tax assets</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Cash & Bank / Cash Equiv.</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Receivables</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Inventories</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Prepayments</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Short-term investments</td><td>✓</td><td>—</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Long-term loans / Borrowings (NCL)</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Deferred tax liabilities</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Provisions (NCL)</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Lease liabilities</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Trade payables / Payables</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Short-term borrowings</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Provisions (current)</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Accruals</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Current tax liabilities</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Accumulated surplus / profits</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Reserves</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Contributed capital</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Income / Revenue / Receipts</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Other Income</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Expense / Expenses / Payments</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Finance Cost</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div id="secCompare" class="chart-container">
+      <h4>Perbandingan Ringkas</h4>
+      <table>
+        <thead><tr><th class="left">Aspek</th><th>MFRS</th><th>MPERS</th><th>MPSAS</th><th>Cash / Modified</th></tr></thead>
+        <tbody>
+          <tr><td class="left">Sektor</td><td>Korporat (awam)</td><td>Persendirian</td><td>Sektor awam</td><td>Kecil / kelab</td></tr>
+          <tr><td class="left">Asas</td><td>Akrual penuh</td><td>Akrual penuh</td><td>Akrual penuh</td><td>Tunai / terubah suai</td></tr>
+          <tr><td class="left">Kompleksiti</td><td>Tinggi</td><td>Sederhana</td><td>Tinggi</td><td>Rendah</td></tr>
+          <tr><td class="left">Pendedahan</td><td>Penuh</td><td>Sederhana</td><td>Penuh (awam)</td><td>Minimum</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="help-text" style="margin-top:12px"><strong>Nota:</strong> Tukar standard akan tukar label kategori dalam dropdown, tetapi data sedia ada kekal. Pastikan standard dipilih sebelum mula memasuk data.</p>
+  </div>
+
   <!-- Summary -->
-  <div class="panel" id="panelSummary" style="display:none">
+  <div class="panel" id="panelSummary" style="display:none" role="tabpanel">
     <h3>Financial Statement Summary</h3>
     <div class="row" style="margin-bottom:16px">
       <div class="input-group" style="flex:1">
@@ -778,85 +608,406 @@
 
     <div class="chart-container">
       <h4>Financial Overview</h4>
-      <div class="chart-placeholder">
-        Pie chart visualization would appear here with actual implementation
-      </div>
+      <canvas id="overviewChart" width="800" height="240" style="width:100%;height:240px"></canvas>
     </div>
 
     <table style="margin-top:20px">
-      <thead>
-        <tr>
-          <th class="left">Financial Metric</th>
-          <th>Amount</th>
-          <th>Rounded (mil)</th>
-        </tr>
-      </thead>
+      <thead><tr><th class="left">Financial Metric</th><th>Amount</th><th>Rounded (mil)</th></tr></thead>
       <tbody>
-        <tr>
-          <td class="left">Total Assets</td>
-          <td id="totalAssets">RM 0.00</td>
-          <td id="totalAssetsM">0.00 m</td>
-        </tr>
-        <tr>
-          <td class="left">Total Liabilities</td>
-          <td id="totalLiab">RM 0.00</td>
-          <td id="totalLiabM">0.00 m</td>
-        </tr>
-        <tr style="background:#f8fafc">
-          <td class="left"><strong>Net Assets (Assets - Liabilities)</strong></td>
-          <td id="netAssets">RM 0.00</td>
-          <td id="netAssetsM">0.00 m</td>
-        </tr>
-        <tr>
-          <td class="left">Current Ratio (Current Assets / Current Liabilities)</td>
-          <td id="currentRatio">-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="left">Debt to Asset Ratio (Liabilities / Assets)</td>
-          <td id="debtAssetRatio">-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="left">Net Asset Ratio (Net Assets / Assets)</td>
-          <td id="netAssetRatio">-</td>
-          <td>-</td>
-        </tr>
+        <tr><td class="left">Total Assets</td><td id="totalAssets">RM 0.00</td><td id="totalAssetsM">0.00 m</td></tr>
+        <tr><td class="left">Total Liabilities</td><td id="totalLiab">RM 0.00</td><td id="totalLiabM">0.00 m</td></tr>
+        <tr style="background:var(--panel-2)"><td class="left"><strong>Net Assets (Assets - Liabilities)</strong></td><td id="netAssets">RM 0.00</td><td id="netAssetsM">0.00 m</td></tr>
+        <tr><td class="left">Current Ratio (Current Assets / Current Liabilities)</td><td id="currentRatio">-</td><td>-</td></tr>
+        <tr><td class="left">Debt to Asset Ratio (Liabilities / Assets)</td><td id="debtAssetRatio">-</td><td>-</td></tr>
+        <tr><td class="left">Net Asset Ratio (Net Assets / Assets)</td><td id="netAssetRatio">-</td><td>-</td></tr>
       </tbody>
     </table>
 
-    <div style="margin-top:20px;padding:16px;background:#f8fafc;border-radius:6px">
-      <div style="display:flex;align-items:center;gap:12px">
+    <div style="margin-top:20px;padding:16px;background:var(--panel-2);border-radius:6px">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <label style="font-weight:500">Reported Total Assets (for reconciliation)</label>
-        <input type="number" id="reportedAssets" style="width:200px" />
+        <input type="text" inputmode="decimal" id="reportedAssets" style="width:200px" />
         <button id="btnCheckCast">Check Casting</button>
         <span id="castResult" style="margin-left:12px;font-weight:600"></span>
       </div>
     </div>
   </div>
 
+  <template id="tmplStandardsBm">
+    <h3>Standard Perakaunan — Panduan Ringkas</h3>
+    <p class="help-text">Pilih standard yang sesuai dengan entiti yang diaudit. Klik standard untuk lompat ke seksyen.</p>
+    <div class="toolbar" style="margin-bottom:12px">
+      <button class="secondary" onclick="document.getElementById('secMFRS').scrollIntoView({behavior:'smooth',block:'start'})">MFRS</button>
+      <button class="secondary" onclick="document.getElementById('secMPERS').scrollIntoView({behavior:'smooth',block:'start'})">MPERS</button>
+      <button class="secondary" onclick="document.getElementById('secMPSAS').scrollIntoView({behavior:'smooth',block:'start'})">MPSAS</button>
+      <button class="secondary" onclick="document.getElementById('secCASH').scrollIntoView({behavior:'smooth',block:'start'})">Tunai / Terubah Suai</button>
+      <button class="secondary" onclick="document.getElementById('secCompare').scrollIntoView({behavior:'smooth',block:'start'})">Perbandingan</button>
+      <button class="secondary" onclick="document.getElementById('secComponents').scrollIntoView({behavior:'smooth',block:'start'})">Komponen</button>
+    </div>
+    <div id="secMFRS" class="stat" style="margin-bottom:12px">
+      <h4>MFRS — Standard Pelaporan Kewangan Malaysia</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Syarikat/entiti besar yang patuh IFRS. Komprehensif: pengiktirafan aset/tanggungan, nilai saksama, pendedahan penuh.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Penyata: Kedudukan Kewangan, Prestasi, Aliran Tunai, Perubahan Ekuiti</li>
+        <li>Aset & liabiliti: semasa / bukan semasa</li>
+        <li>Sesuai: audit korporat & entiti awam tersenarai</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.masb.org.my" target="_blank" rel="noopener">MASB (MFRS)</a></p>
+    </div>
+    <div id="secMPERS" class="stat" style="margin-bottom:12px">
+      <h4>MPERS — Standard Pelaporan Entiti Persendirian Malaysia</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Entiti persendirian kecil/sederhana. Lebih ringkas daripada MFRS.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Struktur penyata lebih ringkas</li>
+        <li>Beberapa pengecualian/pilihan pengukuran</li>
+        <li>Sesuai: SME & entiti tidak tersenarai</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.masb.org.my" target="_blank" rel="noopener">MASB (MPERS)</a></p>
+    </div>
+    <div id="secMPSAS" class="stat" style="margin-bottom:12px">
+      <h4>MPSAS — Standard Perakaunan Sektor Awam Malaysia</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Sektor awam (kerajaan, PBT, agensi). Berasaskan IPSAS.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Terminologi: Surplus/(Deficit), Net Assets/Equity</li>
+        <li>Aset infrastruktur, geran, aset warisan</li>
+        <li>Sesuai: audit kerajaan & badan berkanun</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.anm.gov.my" target="_blank" rel="noopener">JANM (MPSAS)</a></p>
+    </div>
+    <div id="secCASH" class="stat" style="margin-bottom:12px">
+      <h4>Tunai / Tunai Terubah Suai</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Asas tunai: transaksi direkod bila tunai diterima/dibayar. Tunai terubah suai tambah pelarasan akrual terpilih.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Tiada akrual penuh; fokus resit & bayaran</li>
+        <li>Sesuai: entiti kecil, kelab, persatuan</li>
+        <li>Lebih mudah tetapi kurang komprehensif</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.mia.org.my" target="_blank" rel="noopener">MIA (Asas Tunai)</a></p>
+    </div>
+    <div id="secCompare" class="chart-container">
+      <h4>Perbandingan Ringkas</h4>
+      <table>
+        <thead><tr><th class="left">Aspek</th><th>MFRS</th><th>MPERS</th><th>MPSAS</th><th>Tunai / Terubah Suai</th></tr></thead>
+        <tbody>
+          <tr><td class="left">Sektor</td><td>Korporat (awam)</td><td>Persendirian</td><td>Sektor awam</td><td>Kecil / kelab</td></tr>
+          <tr><td class="left">Asas</td><td>Akrual penuh</td><td>Akrual penuh</td><td>Akrual penuh</td><td>Tunai / terubah suai</td></tr>
+          <tr><td class="left">Kompleksiti</td><td>Tinggi</td><td>Sederhana</td><td>Tinggi</td><td>Rendah</td></tr>
+          <tr><td class="left">Pendedahan</td><td>Penuh</td><td>Sederhana</td><td>Penuh (awam)</td><td>Minimum</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="secComponents" class="chart-container" style="margin-bottom:12px">
+      <h4>Perbezaan Komponen dalam App (mengikut standard)</h4>
+      <p class="help-text" style="margin-bottom:8px">Tanda ✓ bermaksud komponen tersedia dalam dropdown standard tersebut.</p>
+      <div style="overflow:auto">
+      <table>
+        <thead><tr><th class="left">Komponen</th><th>MFRS</th><th>MPERS</th><th>MPSAS</th><th>Tunai</th></tr></thead>
+        <tbody>
+          <tr><td class="left">PPE</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Harta Pelaburan / Pelaburan Jangka Panjang</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Aset Tidak Ketara</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Aset Hak Guna</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Aset Biologi</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Aset Cukai Tertunda</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Tunai & Bank / Setara Tunai</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Penerimaan</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Inventori</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Prabayaran</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Pelaburan Jangka Pendek</td><td>✓</td><td>—</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Pinjaman Jangka Panjang / Pinjaman (NCL)</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Liabiliti Cukai Tertunda</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Provisi (NCL)</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Liabiliti Pajakan</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Pemiutang / Boleh Bayar</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Pinjaman Jangka Pendek</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Provisi (semasa)</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Akrual</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Liabiliti Cukai Semasa</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Lebihan Terkumpul / Keuntungan</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Rizab</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Modal Diberi</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Pendapatan / Hasil / Resit</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Pendapatan Lain</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Perbelanjaan / Bayaran</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Kos Kewangan</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <p class="help-text" style="margin-top:12px"><strong>Nota:</strong> Tukar standard akan tukar label kategori dalam dropdown, tetapi data sedia ada kekal. Pastikan standard dipilih sebelum mula memasuk data.</p>
+  </template>
+<template id="tmplStandardsEn">
+
+    <h3>Accounting Standards — Quick Guide</h3>
+    <p class="help-text">Pilih standard yang sesuai dengan entiti yang diaudit. Klik pada standard untuk lompat ke seksyen.</p>
+
+    <div class="toolbar" style="margin-bottom:12px">
+      <button class="secondary" onclick="document.getElementById('secMFRS').scrollIntoView({behavior:'smooth',block:'start'})">MFRS</button>
+      <button class="secondary" onclick="document.getElementById('secMPERS').scrollIntoView({behavior:'smooth',block:'start'})">MPERS</button>
+      <button class="secondary" onclick="document.getElementById('secMPSAS').scrollIntoView({behavior:'smooth',block:'start'})">MPSAS</button>
+      <button class="secondary" onclick="document.getElementById('secCASH').scrollIntoView({behavior:'smooth',block:'start'})">Cash / Modified</button>
+      <button class="secondary" onclick="document.getElementById('secCompare').scrollIntoView({behavior:'smooth',block:'start'})">Perbandingan</button>
+      <button class="secondary" onclick="document.getElementById('secComponents').scrollIntoView({behavior:'smooth',block:'start'})">Komponen</button>
+    </div>
+
+    <div id="secMFRS" class="stat" style="margin-bottom:12px">
+      <h4>MFRS — Malaysian Financial Reporting Standards</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Syarikat/entiti besar yang patuh IFRS. Komprehensif: pengiktirafan aset/tanggungan, nilai saksama, pendedahan penuh.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Penyata: Kedudukan Kewangan, Prestasi, Aliran Tunai, Perubahan Ekuiti</li>
+        <li>Aset & liabiliti: semasa / bukan semasa</li>
+        <li>Sesuai: audit korporat & entiti awam tersenarai</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.masb.org.my" target="_blank" rel="noopener">MASB (MFRS)</a></p>
+    </div>
+
+    <div id="secMPERS" class="stat" style="margin-bottom:12px">
+      <h4>MPERS — Malaysian Private Entity Reporting Standard</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Entiti persendirian kecil/sederhana. Lebih ringkas daripada MFRS.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Struktur penyata lebih ringkas</li>
+        <li>Beberapa pengecualian/pilihan pengukuran</li>
+        <li>Sesuai: SME & entiti tidak tersenarai</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.masb.org.my" target="_blank" rel="noopener">MASB (MPERS)</a></p>
+    </div>
+
+    <div id="secMPSAS" class="stat" style="margin-bottom:12px">
+      <h4>MPSAS — Malaysian Public Sector Accounting Standards</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Sektor awam (kerajaan, PBT, agensi). Berasaskan IPSAS.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Terminologi: Surplus/(Deficit), Net Assets/Equity</li>
+        <li>Aset infrastruktur, geran, aset warisan</li>
+        <li>Sesuai: audit kerajaan & badan berkanun</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.anm.gov.my" target="_blank" rel="noopener">JANM (MPSAS)</a></p>
+    </div>
+
+    <div id="secCASH" class="stat" style="margin-bottom:12px">
+      <h4>Cash / Modified Cash</h4>
+      <p style="font-size:0.9rem;color:var(--muted)">Asas tunai: transaksi direkod bila tunai diterima/dibayar. Modified cash tambah pelarasan akrual terpilih.</p>
+      <ul style="font-size:0.9rem;padding-left:18px;margin:6px 0">
+        <li>Tiada akrual penuh; fokus resit & bayaran</li>
+        <li>Sesuai: entiti kecil, kelab, persatuan</li>
+        <li>Lebih mudah tetapi kurang komprehensif</li>
+      </ul>
+      <p style="font-size:0.85rem;margin:6px 0">Sumber: <a href="https://www.mia.org.my" target="_blank" rel="noopener">MIA (Cash Basis)</a></p>
+    </div>
+
+    <div id="secComponents" class="chart-container" style="margin-bottom:12px">
+      <h4>Perbezaan Komponen dalam App (mengikut standard)</h4>
+      <p class="help-text" style="margin-bottom:8px">Tanda ✓ bermaksud komponen tersedia dalam dropdown standard tersebut.</p>
+      <div style="overflow:auto">
+      <table>
+        <thead><tr><th class="left">Komponen</th><th>MFRS</th><th>MPERS</th><th>MPSAS</th><th>Cash</th></tr></thead>
+        <tbody>
+          <tr><td class="left">PPE</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Investment Property / Long-term Inv.</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Intangible assets</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Right-of-use assets</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Biological assets</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Deferred tax assets</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Cash & Bank / Cash Equiv.</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Receivables</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Inventories</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Prepayments</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Short-term investments</td><td>✓</td><td>—</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Long-term loans / Borrowings (NCL)</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Deferred tax liabilities</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Provisions (NCL)</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Lease liabilities</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Trade payables / Payables</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Short-term borrowings</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Provisions (current)</td><td>✓</td><td>—</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Accruals</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Current tax liabilities</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Accumulated surplus / profits</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Reserves</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Contributed capital</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td class="left">Income / Revenue / Receipts</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Other Income</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Expense / Expenses / Payments</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td class="left">Finance Cost</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div id="secCompare" class="chart-container">
+      <h4>Perbandingan Ringkas</h4>
+      <table>
+        <thead><tr><th class="left">Aspek</th><th>MFRS</th><th>MPERS</th><th>MPSAS</th><th>Cash / Modified</th></tr></thead>
+        <tbody>
+          <tr><td class="left">Sektor</td><td>Korporat (awam)</td><td>Persendirian</td><td>Sektor awam</td><td>Kecil / kelab</td></tr>
+          <tr><td class="left">Asas</td><td>Akrual penuh</td><td>Akrual penuh</td><td>Akrual penuh</td><td>Tunai / terubah suai</td></tr>
+          <tr><td class="left">Kompleksiti</td><td>Tinggi</td><td>Sederhana</td><td>Tinggi</td><td>Rendah</td></tr>
+          <tr><td class="left">Pendedahan</td><td>Penuh</td><td>Sederhana</td><td>Penuh (awam)</td><td>Minimum</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="help-text" style="margin-top:12px"><strong>Nota:</strong> Tukar standard akan tukar label kategori dalam dropdown, tetapi data sedia ada kekal. Pastikan standard dipilih sebelum mula memasuk data.</p>
+  
+</template>
   <footer><div id="credit" class="credit">by Rashid Zainol - JANN Sarawak 2025</div></footer>
 </div>
 
 <script>
 /* ================= SETTINGS ================= */
-const settings = { 
-  lang:'en', 
-  currency:'RM', 
-  mood:'professional', 
-  tolerancePct:0.005 
+const settings = {
+  lang:'en',
+  currency:'RM',
+  mood:'professional',
+  tolerancePct:0.005
 };
 
-let state = { 
-  currency: settings.currency, 
-  data: { 
-    nc:[], 
-    c:[], 
-    ncl:[], 
-    cl:[], 
-    eq:[], 
-    pl:[] 
+const translations = {
+  en: {
+    tabs: {
+      nc:'Non-Current Assets', c:'Current Assets', ncl:'Non-Current Liabilities', cl:'Current Liabilities',
+      eq:'Equity / Net Assets', pnl:'Income & Expenses', standards:'Accounting Standards', summary:'Summary'
+    },
+    btn: {
+      save:'Save Session', load:'Load Session', undo:'Undo', redo:'Redo', clear:'Clear All',
+      exportCsv:'Export CSV', importCsv:'Import CSV', checkCast:'Check Casting', print:'Print',
+      standards:'Accounting Standards ℹ️'
+    },
+    help: {
+      nc:'Select a category, enter the amount, and press Enter to add',
+      c:'Select a category, enter the amount, and press Enter to add',
+      ncl:'Select a category, enter the amount, and press Enter to add',
+      cl:'Select a category, enter the amount, and press Enter to add',
+      eq:'Select a category, enter the amount, and press Enter to add',
+      pnl:'Select a category, enter the amount, and press Enter to add. Expenses should be entered as positive numbers.',
+      standards:'Choose the standard that matches the audited entity. Click a standard to jump to its section.'
+    },
+    panelTitle: {
+      nc:'Non-Current Assets', c:'Current Assets', ncl:'Non-Current Liabilities', cl:'Current Liabilities',
+      eq:'Equity / Net Assets', pnl:'Income & Expenses', standards:'Accounting Standards — Quick Guide', summary:'Financial Statement Summary'
+    },
+    standardsIntro:'Choose the standard that matches the audited entity. Click a standard to jump to its section.'
   },
+  bm: {
+    tabs: {
+      nc:'Aset Bukan Semasa', c:'Aset Semasa', ncl:'Liabiliti Bukan Semasa', cl:'Liabiliti Semasa',
+      eq:'Ekuiti / Aset Bersih', pnl:'Pendapatan & Perbelanjaan', standards:'Standard Perakaunan', summary:'Ringkasan Penyata Kewangan'
+    },
+    btn: {
+      save:'Simpan Sesi', load:'Muat Sesi', undo:'Buat Semula', redo:'Ulang', clear:'Kosongkan Semua',
+      exportCsv:'Eksport CSV', importCsv:'Import CSV', checkCast:'Semak Casting', print:'Cetak',
+      standards:'Standard Perakaunan ℹ️'
+    },
+    help: {
+      nc:'Pilih kategori, masukkan jumlah, tekan Enter untuk tambah',
+      c:'Pilih kategori, masukkan jumlah, tekan Enter untuk tambah',
+      ncl:'Pilih kategori, masukkan jumlah, tekan Enter untuk tambah',
+      cl:'Pilih kategori, masukkan jumlah, tekan Enter untuk tambah',
+      eq:'Pilih kategori, masukkan jumlah, tekan Enter untuk tambah',
+      pnl:'Pilih kategori, masukkan jumlah, tekan Enter untuk tambah. Perbelanjaan dimasukkan sebagai nombor positif.',
+      standards:'Pilih standard yang sesuai dengan entiti yang diaudit. Klik standard untuk lompat ke seksyen.'
+    },
+    panelTitle: {
+      nc:'Aset Bukan Semasa', c:'Aset Semasa', ncl:'Liabiliti Bukan Semasa', cl:'Liabiliti Semasa',
+      eq:'Ekuiti / Aset Bersih', pnl:'Pendapatan & Perbelanjaan', standards:'Standard Perakaunan — Panduan Ringkas', summary:'Ringkasan Penyata Kewangan'
+    },
+    standardsIntro:'Pilih standard yang sesuai dengan entiti yang diaudit. Klik standard untuk lompat ke seksyen.'
+  }
+};
+
+function t(keyPath){
+  const parts = keyPath.split('.');
+  let obj = translations[state.lang] || translations.en;
+  for (const p of parts) { if (obj && obj[p] !== undefined) obj = obj[p]; else return keyPath; }
+  return obj;
+}
+
+function applyLanguage(lang){
+  state.lang = lang;
+  settings.lang = lang;
+  const L = translations[lang] || translations.en;
+
+  // tabs
+  document.getElementById('tabNonCurrent').textContent = L.tabs.nc;
+  document.getElementById('tabCurrent').textContent = L.tabs.c;
+  document.getElementById('tabNonCurrentLiab').textContent = L.tabs.ncl;
+  document.getElementById('tabCurrentLiab').textContent = L.tabs.cl;
+  document.getElementById('tabEquity').textContent = L.tabs.eq;
+  document.getElementById('tabPnl').textContent = L.tabs.pnl;
+  document.getElementById('tabStandards').textContent = L.tabs.standards;
+  document.getElementById('tabSummary').textContent = L.tabs.summary;
+
+  // buttons
+  document.getElementById('btnSave').textContent = L.btn.save;
+  document.getElementById('btnLoad').textContent = L.btn.load;
+  document.getElementById('btnUndo').textContent = L.btn.undo;
+  document.getElementById('btnRedo').textContent = L.btn.redo;
+  document.getElementById('btnClear').textContent = L.btn.clear;
+  document.getElementById('btnExportCSV').textContent = L.btn.exportCsv;
+  document.getElementById('btnImportCSV').textContent = L.btn.importCsv;
+  document.getElementById('btnCheckCast').textContent = L.btn.checkCast;
+  document.getElementById('btnPrint').textContent = L.btn.print;
+  document.getElementById('btnStandards').textContent = L.btn.standards;
+
+  // panel titles
+  const titleMap = {
+    panelNonCurrent: L.panelTitle.nc,
+    panelCurrent: L.panelTitle.c,
+    panelNonCurrentLiab: L.panelTitle.ncl,
+    panelCurrentLiab: L.panelTitle.cl,
+    panelEquity: L.panelTitle.eq,
+    panelPnl: L.panelTitle.pnl,
+    panelStandards: L.panelTitle.standards,
+    panelSummary: L.panelTitle.summary
+  };
+  Object.keys(titleMap).forEach(pid => {
+    const panel = document.getElementById(pid);
+    if (panel) { const h3 = panel.querySelector('h3'); if (h3) h3.textContent = titleMap[pid]; }
+  });
+
+  // help texts
+  const helpMap = {
+    panelNonCurrent: L.help.nc,
+    panelCurrent: L.help.c,
+    panelNonCurrentLiab: L.help.ncl,
+    panelCurrentLiab: L.help.cl,
+    panelEquity: L.help.eq,
+    panelPnl: L.help.pnl,
+    panelStandards: L.help.standards
+  };
+  Object.keys(helpMap).forEach(pid => {
+    const panel = document.getElementById(pid);
+    if (panel) { const p = panel.querySelector('.help-text'); if (p) p.textContent = helpMap[pid]; }
+  });
+
+  // Accounting Standards section follows language
+  const panel = document.getElementById('panelStandards');
+  if (panel) {
+    const tmplId = (lang === 'bm') ? 'tmplStandardsBm' : 'tmplStandardsEn';
+    const tmpl = document.getElementById(tmplId);
+    if (tmpl) panel.innerHTML = tmpl.innerHTML;
+  }
+
+  // highlight active language button
+  const btnEn = document.getElementById('btnLangEn');
+  const btnMy = document.getElementById('btnLangMy');
+  if (btnEn) { btnEn.style.opacity = (lang === 'en') ? '1' : '0.6'; btnEn.style.fontWeight = (lang === 'en') ? '700' : '400'; }
+  if (btnMy) { btnMy.style.opacity = (lang === 'bm') ? '1' : '0.6'; btnMy.style.fontWeight = (lang === 'bm') ? '700' : '400'; }
+
+  saveSessionAuto();
+}
+
+const HISTORY_LIMIT = 50;
+let history = [];
+let historyIndex = -1;
+
+let state = {
+  currency: settings.currency,
+  theme: settings.mood,
+  standard: 'MFRS',
+  lang: 'en',
+  data: { nc:[], c:[], ncl:[], cl:[], eq:[], pl:[] },
+  reported: { nc:'', c:'', ncl:'', cl:'', eq:'', pl:'', assets:'' },
+  reportTitle: '',
   metadata: {
     created: new Date().toISOString(),
     lastModified: new Date().toISOString(),
@@ -864,230 +1015,488 @@ let state = {
   }
 };
 
+/* ================ HELPERS =============== */
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+function normalizeState(){
+  if (!state || typeof state !== 'object') state = {};
+  if (!state.data || typeof state.data !== 'object') state.data = {};
+  ['nc','c','ncl','cl','eq','pl'].forEach(k => {
+    if (!Array.isArray(state.data[k])) state.data[k] = [];
+  });
+  if (typeof state.currency !== 'string' || !state.currency) state.currency = settings.currency;
+  if (typeof state.theme !== 'string' || !state.theme) state.theme = settings.mood;
+  if (typeof state.standard !== 'string' || !state.standard) state.standard = 'MFRS';
+  if (state.lang !== 'en' && state.lang !== 'bm') state.lang = 'en';
+  if (typeof state.reportTitle !== 'string') state.reportTitle = '';
+  if (!state.reported || typeof state.reported !== 'object') state.reported = {};
+  ['nc','c','ncl','cl','eq','pl','assets'].forEach(k => {
+    if (state.reported[k] === undefined || state.reported[k] === null) state.reported[k] = '';
+  });
+  if (!state.metadata || typeof state.metadata !== 'object') state.metadata = {};
+  if (!state.metadata.created) state.metadata.created = new Date().toISOString();
+  if (!state.metadata.lastModified) state.metadata.lastModified = state.metadata.created;
+  if (!state.metadata.version) state.metadata.version = '1.0';
+}
+
+function pushHistory(){
+  try {
+    if (historyIndex < history.length - 1) {
+      history = history.slice(0, historyIndex + 1);
+    }
+    history.push(JSON.stringify(state));
+    if (history.length > HISTORY_LIMIT) history.shift();
+    historyIndex = history.length - 1;
+    updateUndoRedoButtons();
+  } catch(e){ console.error('pushHistory failed', e); }
+}
+
+function undo(){
+  if (historyIndex <= 0) return;
+  historyIndex--;
+  state = JSON.parse(history[historyIndex]);
+  normalizeState();
+  renderAll();
+  syncReportedInputs();
+  applyTheme(state.theme);
+  document.getElementById('themeSelect').value = state.theme;
+  document.getElementById('currencySelect').value = state.currency;
+  document.getElementById('standardSelect').value = state.standard;
+  applyLanguage(state.lang);
+  saveSessionAuto();
+  showNotification('Undo', 'warning');
+  updateUndoRedoButtons();
+}
+
+function redo(){
+  if (historyIndex >= history.length - 1) return;
+  historyIndex++;
+  state = JSON.parse(history[historyIndex]);
+  normalizeState();
+  renderAll();
+  syncReportedInputs();
+  applyTheme(state.theme);
+  document.getElementById('themeSelect').value = state.theme;
+  document.getElementById('currencySelect').value = state.currency;
+  document.getElementById('standardSelect').value = state.standard;
+  applyLanguage(state.lang);
+  saveSessionAuto();
+  showNotification('Redo', 'success');
+  updateUndoRedoButtons();
+}
+
+function updateUndoRedoButtons(){
+  const u = document.getElementById('btnUndo');
+  const r = document.getElementById('btnRedo');
+  if (u) u.disabled = historyIndex <= 0;
+  if (r) r.disabled = historyIndex >= history.length - 1;
+}
+
 /* ================ FORMATTERS =============== */
-function fmt(num){ 
-  if(!isFinite(num)) return state.currency+' 0.00'; 
-  return state.currency+' '+Number(num).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); 
+function fmt(num){
+  const cur = state.currency || settings.currency || 'RM';
+  if(!isFinite(num)) return cur+' 0.00';
+  return cur+' '+Number(num).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 }
-
-function fmt0(num){ 
-  if(!isFinite(num)) return state.currency+' 0'; 
-  return state.currency+' '+Number(num).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); 
+function fmt0(num){
+  const cur = state.currency || settings.currency || 'RM';
+  if(!isFinite(num)) return cur+' 0';
+  return cur+' '+Number(num).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
 }
-
-function fmtMil(num){ 
-  return Number(num/1_000_000).toFixed(2)+' m'; 
-}
+function fmtMil(num){ return Number(num/1_000_000).toFixed(2)+' m'; }
 
 /* ================ TABS ================ */
-const tabs = { 
-  tabNonCurrent:'panelNonCurrent', 
-  tabCurrent:'panelCurrent', 
-  tabNonCurrentLiab:'panelNonCurrentLiab', 
-  tabCurrentLiab:'panelCurrentLiab', 
-  tabEquity:'panelEquity', 
-  tabPnl:'panelPnl', 
-  tabSummary:'panelSummary' 
+const tabs = {
+  tabNonCurrent:'panelNonCurrent',
+  tabCurrent:'panelCurrent',
+  tabNonCurrentLiab:'panelNonCurrentLiab',
+  tabCurrentLiab:'panelCurrentLiab',
+  tabEquity:'panelEquity',
+  tabPnl:'panelPnl',
+  tabStandards:'panelStandards',
+  tabSummary:'panelSummary'
 };
 
 Object.keys(tabs).forEach(id => {
-  document.getElementById(id).addEventListener('click', () => { 
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); 
-    document.getElementById(id).classList.add('active'); 
-    Object.values(tabs).forEach(v => document.getElementById(v).style.display = 'none'); 
-    document.getElementById(tabs[id]).style.display = 'block'; 
-    if(id === 'tabSummary') renderSummary(); 
+  document.getElementById(id).addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+    const el = document.getElementById(id);
+    el.classList.add('active');
+    el.setAttribute('aria-selected','true');
+    Object.values(tabs).forEach(v => document.getElementById(v).style.display = 'none');
+    document.getElementById(tabs[id]).style.display = 'block';
+    if(id === 'tabSummary') renderSummary();
   });
 });
 
 /* ================ ADD / RENDER ============== */
-function addTo(type, category, amount){ 
+function addTo(type, category, amount){
   if(!isFinite(amount) || amount <= 0) {
     showNotification('Please enter a valid amount', 'error');
     return;
   }
-  
-  state.data[type].push({category, amount}); 
+  state.data[type].push({category, amount});
   state.metadata.lastModified = new Date().toISOString();
-  renderType(type); 
-  saveSessionAuto(); 
+  renderType(type);
+  saveSessionAuto();
+  pushHistory();
   showNotification('Entry added successfully', 'success');
-  
-  // Clear the input field after adding
   const inputId = type + 'Amount';
   document.getElementById(inputId).value = '';
 }
 
-function renderType(type){ 
-  const map = {
-    'nc':'ncTable',
-    'c':'cTable',
-    'ncl':'nclTable',
-    'cl':'clTable',
-    'eq':'eqTable',
-    'pl':'plTable'
-  }; 
-  
-  const tbody = document.getElementById(map[type]).querySelector('tbody'); 
-  tbody.innerHTML = ''; 
-  
+function renderType(type){
+  const map = { 'nc':'ncTable','c':'cTable','ncl':'nclTable','cl':'clTable','eq':'eqTable','pl':'plTable' };
+  const tbody = document.getElementById(map[type]).querySelector('tbody');
+  tbody.innerHTML = '';
+
+  const colSpan = type === 'pl' ? 5 : 4;
+
+  if (state.data[type].length === 0) {
+    const tr = document.createElement('tr');
+    tr.className = 'empty-row';
+    tr.innerHTML = `<td class="left" colspan="${colSpan}">No entries yet</td>`;
+    tbody.appendChild(tr);
+    updateTotals();
+    return;
+  }
+
   if (type === 'pl') {
-    // Special rendering for P&L to show type and proper formatting
-    state.data[type].forEach((r, i) => { 
-      const tr = document.createElement('tr'); 
+    state.data[type].forEach((r, i) => {
+      const tr = document.createElement('tr');
       const typeClass = isIncomeCategory(r.category) ? 'profit' : 'loss';
       tr.innerHTML = `
-        <td class='left'>${labelFor(r.category)}</td>
-        <td>${getPnlType(r.category)}</td>
+        <td class='left'>${escapeHtml(labelFor(r.category))}</td>
+        <td>${escapeHtml(getPnlType(r.category))}</td>
         <td style='text-align:right' class="${typeClass}">${fmt(r.amount)}</td>
         <td style='text-align:right'>${fmtMil(r.amount)}</td>
         <td style='text-align:center'>
-          <button class='small-btn edit' onclick="startEdit('${type}',${i})">Edit</button> 
+          <button class='small-btn edit' onclick="startEdit('${type}',${i})">Edit</button>
           <button class='small-btn del' onclick="deleteRow('${type}',${i})">Del</button>
         </td>
-      `; 
-      tbody.appendChild(tr); 
+      `;
+      tbody.appendChild(tr);
     });
   } else {
-    // Standard rendering for other types
-    state.data[type].forEach((r, i) => { 
-      const tr = document.createElement('tr'); 
+    state.data[type].forEach((r, i) => {
+      const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class='left'>${labelFor(r.category)}</td>
+        <td class='left'>${escapeHtml(labelFor(r.category))}</td>
         <td style='text-align:right'>${fmt(r.amount)}</td>
         <td style='text-align:right'>${fmtMil(r.amount)}</td>
         <td style='text-align:center'>
-          <button class='small-btn edit' onclick="startEdit('${type}',${i})">Edit</button> 
+          <button class='small-btn edit' onclick="startEdit('${type}',${i})">Edit</button>
           <button class='small-btn del' onclick="deleteRow('${type}',${i})">Del</button>
         </td>
-      `; 
-      tbody.appendChild(tr); 
+      `;
+      tbody.appendChild(tr);
     });
   }
-  
-  updateTotals(); 
+  updateTotals();
 }
 
-function isIncomeCategory(category) {
-  return category === 'income' || category === 'other_income';
-}
-
+function isIncomeCategory(category) { return category === 'income' || category === 'other_income'; }
 function getPnlType(category) {
   if (category === 'income' || category === 'other_income') return 'Income';
   if (category === 'expense' || category === 'finance_cost') return 'Expense';
   return 'Other';
 }
 
-function labelFor(cat){ 
-  const m = {
-    nc_main:'Non-Current Assets',
-    ppe:'PPE',
-    investments:'Investments',
-    intangible:'Intangible assets',
-    right_of_use:'Right-of-use assets',
-    biological:'Biological assets',
-    deferred_tax_asset:'Deferred tax asset',
-    other_non_current:'Other non-current assets',
-    c_main:'Current Assets',
-    cash:'Cash & Bank',
-    receivables:'Receivables',
-    inventories:'Inventories',
-    prepayments:'Prepayments',
-    short_investments:'Short-term investments',
-    other_current:'Other current assets',
-    ncl_main:'Non-Current Liabilities',
-    long_term_loans:'Long-term loans',
-    deferred_tax:'Deferred tax liabilities',
-    provisions_ncl:'Provisions (non-current)',
-    lease_liab:'Lease liabilities',
-    other_ncl:'Other non-current liabilities',
-    cl_main:'Current Liabilities',
-    trade_payables:'Trade payables',
-    short_borrowings:'Short-term borrowings',
-    current_provisions:'Provisions (current)',
-    accruals:'Accruals',
-    tax_liabilities:'Current tax liabilities',
-    other_cl:'Other current liabilities',
-    eq_main:'Equity / Net Assets',
-    accumulated_surplus:'Accumulated surplus',
-    reserves:'Reserves',
-    contributed_capital:'Contributed capital',
-    other_equity:'Other equity',
-    income:'Income',
-    expense:'Expense',
-    other_income:'Other Income',
-    finance_cost:'Finance Cost'
-  }; 
-  
-  return m[cat] || cat; 
+const standardCategories = {
+  MFRS: {
+    nc: [
+      {value:'nc_main',label:'Non-Current Assets'},
+      {value:'ppe',label:'Property, Plant & Equipment'},
+      {value:'investments',label:'Investment Property / Long-term Investments'},
+      {value:'intangible',label:'Intangible assets'},
+      {value:'right_of_use',label:'Right-of-use assets'},
+      {value:'biological',label:'Biological assets'},
+      {value:'deferred_tax_asset',label:'Deferred tax assets'},
+      {value:'other_non_current',label:'Other non-current assets'}
+    ],
+    c: [
+      {value:'c_main',label:'Current Assets'},
+      {value:'cash',label:'Cash & Bank'},
+      {value:'receivables',label:'Trade & Other Receivables'},
+      {value:'inventories',label:'Inventories'},
+      {value:'prepayments',label:'Prepayments'},
+      {value:'short_investments',label:'Short-term investments'},
+      {value:'other_current',label:'Other current assets'}
+    ],
+    ncl: [
+      {value:'ncl_main',label:'Non-Current Liabilities'},
+      {value:'long_term_loans',label:'Long-term loans'},
+      {value:'deferred_tax',label:'Deferred tax liabilities'},
+      {value:'provisions_ncl',label:'Provisions (non-current)'},
+      {value:'lease_liab',label:'Lease liabilities'},
+      {value:'other_ncl',label:'Other non-current liabilities'}
+    ],
+    cl: [
+      {value:'cl_main',label:'Current Liabilities'},
+      {value:'trade_payables',label:'Trade payables'},
+      {value:'short_borrowings',label:'Short-term borrowings'},
+      {value:'current_provisions',label:'Provisions (current)'},
+      {value:'accruals',label:'Accruals'},
+      {value:'tax_liabilities',label:'Current tax liabilities'},
+      {value:'other_cl',label:'Other current liabilities'}
+    ],
+    eq: [
+      {value:'eq_main',label:'Equity / Net Assets'},
+      {value:'accumulated_surplus',label:'Accumulated surplus / retained earnings'},
+      {value:'reserves',label:'Reserves'},
+      {value:'contributed_capital',label:'Contributed capital'},
+      {value:'other_equity',label:'Other equity'}
+    ],
+    pl: [
+      {value:'income',label:'Income'},
+      {value:'other_income',label:'Other Income'},
+      {value:'expense',label:'Expense'},
+      {value:'finance_cost',label:'Finance Cost'}
+    ]
+  },
+  MPERS: {
+    nc: [
+      {value:'nc_main',label:'Non-Current Assets'},
+      {value:'ppe',label:'Property, Plant & Equipment'},
+      {value:'investments',label:'Long-term Investments'},
+      {value:'intangible',label:'Intangible assets'},
+      {value:'other_non_current',label:'Other non-current assets'}
+    ],
+    c: [
+      {value:'c_main',label:'Current Assets'},
+      {value:'cash',label:'Cash & Bank'},
+      {value:'receivables',label:'Trade & Other Receivables'},
+      {value:'inventories',label:'Inventories'},
+      {value:'prepayments',label:'Prepayments'},
+      {value:'other_current',label:'Other current assets'}
+    ],
+    ncl: [
+      {value:'ncl_main',label:'Non-Current Liabilities'},
+      {value:'long_term_loans',label:'Long-term loans'},
+      {value:'provisions_ncl',label:'Provisions (non-current)'},
+      {value:'other_ncl',label:'Other non-current liabilities'}
+    ],
+    cl: [
+      {value:'cl_main',label:'Current Liabilities'},
+      {value:'trade_payables',label:'Trade payables'},
+      {value:'short_borrowings',label:'Short-term borrowings'},
+      {value:'accruals',label:'Accruals'},
+      {value:'tax_liabilities',label:'Current tax liabilities'},
+      {value:'other_cl',label:'Other current liabilities'}
+    ],
+    eq: [
+      {value:'eq_main',label:'Equity'},
+      {value:'accumulated_surplus',label:'Accumulated profits'},
+      {value:'reserves',label:'Reserves'},
+      {value:'contributed_capital',label:'Contributed capital'},
+      {value:'other_equity',label:'Other equity'}
+    ],
+    pl: [
+      {value:'income',label:'Revenue'},
+      {value:'other_income',label:'Other Income'},
+      {value:'expense',label:'Expenses'},
+      {value:'finance_cost',label:'Finance Costs'}
+    ]
+  },
+  MPSAS: {
+    nc: [
+      {value:'nc_main',label:'Non-Current Assets'},
+      {value:'ppe',label:'Property, Plant & Equipment'},
+      {value:'investments',label:'Investments'},
+      {value:'intangible',label:'Intangible assets'},
+      {value:'right_of_use',label:'Right-of-use assets'},
+      {value:'biological',label:'Biological assets'},
+      {value:'deferred_tax_asset',label:'Deferred tax assets'},
+      {value:'other_non_current',label:'Other non-current assets'}
+    ],
+    c: [
+      {value:'c_main',label:'Current Assets'},
+      {value:'cash',label:'Cash & Cash Equivalents'},
+      {value:'receivables',label:'Receivables'},
+      {value:'inventories',label:'Inventories'},
+      {value:'prepayments',label:'Prepayments'},
+      {value:'short_investments',label:'Short-term investments'},
+      {value:'other_current',label:'Other current assets'}
+    ],
+    ncl: [
+      {value:'ncl_main',label:'Non-Current Liabilities'},
+      {value:'long_term_loans',label:'Borrowings (non-current)'},
+      {value:'deferred_tax',label:'Deferred tax liabilities'},
+      {value:'provisions_ncl',label:'Provisions (non-current)'},
+      {value:'lease_liab',label:'Lease liabilities'},
+      {value:'other_ncl',label:'Other non-current liabilities'}
+    ],
+    cl: [
+      {value:'cl_main',label:'Current Liabilities'},
+      {value:'trade_payables',label:'Payables'},
+      {value:'short_borrowings',label:'Borrowings (current)'},
+      {value:'current_provisions',label:'Provisions (current)'},
+      {value:'accruals',label:'Accruals'},
+      {value:'tax_liabilities',label:'Current tax liabilities'},
+      {value:'other_cl',label:'Other current liabilities'}
+    ],
+    eq: [
+      {value:'eq_main',label:'Net Assets / Equity'},
+      {value:'accumulated_surplus',label:'Accumulated surplus/(deficit)'},
+      {value:'reserves',label:'Reserves'},
+      {value:'contributed_capital',label:'Contributed capital'},
+      {value:'other_equity',label:'Other equity'}
+    ],
+    pl: [
+      {value:'income',label:'Revenue'},
+      {value:'other_income',label:'Other Income'},
+      {value:'expense',label:'Expenses'},
+      {value:'finance_cost',label:'Finance Costs'}
+    ]
+  },
+  CASH: {
+    nc: [
+      {value:'nc_main',label:'Non-Current Assets (at cost)'},
+      {value:'ppe',label:'Property, Plant & Equipment'},
+      {value:'other_non_current',label:'Other non-current assets'}
+    ],
+    c: [
+      {value:'c_main',label:'Cash & Bank'},
+      {value:'cash',label:'Cash on hand / at bank'},
+      {value:'short_investments',label:'Short-term investments'},
+      {value:'other_current',label:'Other current assets'}
+    ],
+    ncl: [
+      {value:'ncl_main',label:'Non-Current Liabilities'},
+      {value:'other_ncl',label:'Other non-current liabilities'}
+    ],
+    cl: [
+      {value:'cl_main',label:'Current Liabilities'},
+      {value:'trade_payables',label:'Payables'},
+      {value:'other_cl',label:'Other current liabilities'}
+    ],
+    eq: [
+      {value:'eq_main',label:'Net Assets'},
+      {value:'accumulated_surplus',label:'Accumulated surplus'},
+      {value:'other_equity',label:'Other equity'}
+    ],
+    pl: [
+      {value:'income',label:'Cash Receipts'},
+      {value:'other_income',label:'Other Receipts'},
+      {value:'expense',label:'Cash Payments'},
+      {value:'finance_cost',label:'Finance Costs'}
+    ]
+  }
+};
+
+function categoriesFor(type){
+  const std = standardCategories[state.standard] || standardCategories.MFRS;
+  return std[type] || standardCategories.MFRS[type] || [];
 }
 
-function startEdit(type, index){ 
-  const r = state.data[type][index]; 
-  const newVal = prompt('Edit amount for ' + labelFor(r.category), r.amount); 
-  
-  if(newVal === null) return; 
-  
-  const v = parseFloat(newVal); 
+function labelFor(cat){
+  for (const type of ['nc','c','ncl','cl','eq','pl']) {
+    const found = (standardCategories[state.standard]?.[type] || []).find(o => o.value === cat);
+    if (found) return found.label;
+  }
+  // fallback any standard
+  for (const std of Object.keys(standardCategories)) {
+    for (const type of ['nc','c','ncl','cl','eq','pl']) {
+      const found = (standardCategories[std]?.[type] || []).find(o => o.value === cat);
+      if (found) return found.label;
+    }
+  }
+  return cat;
+}
+
+function populateCategorySelects(){
+  const mapping = [
+    {select:'ncCategory', type:'nc'},
+    {select:'cCategory', type:'c'},
+    {select:'nclCategory', type:'ncl'},
+    {select:'clCategory', type:'cl'},
+    {select:'eqCategory', type:'eq'},
+    {select:'plCategory', type:'pl'}
+  ];
+  mapping.forEach(m => {
+    const sel = document.getElementById(m.select);
+    if (!sel) return;
+    const current = sel.value;
+    sel.innerHTML = '';
+    categoriesFor(m.type).forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt.value;
+      o.textContent = opt.label;
+      sel.appendChild(o);
+    });
+    if (current && categoriesFor(m.type).some(o => o.value === current)) sel.value = current;
+  });
+}
+
+function startEdit(type, index){
+  const r = state.data[type][index];
+  const newVal = prompt('Edit amount for ' + labelFor(r.category), r.amount);
+  if(newVal === null) return;
+  const v = parseFloat(String(newVal).replace(/,/g, ''));
   if(!isFinite(v) || v < 0){
     showNotification('Invalid amount entered', 'error');
     return;
-  } 
-  
-  state.data[type][index].amount = v; 
+  }
+  if (v === 0) {
+    if (!confirm('Set amount to 0? This entry will remain. Use Delete to remove.')) return;
+  }
+  state.data[type][index].amount = v;
   state.metadata.lastModified = new Date().toISOString();
-  renderType(type); 
-  saveSessionAuto(); 
+  renderType(type);
+  saveSessionAuto();
+  pushHistory();
   showNotification('Entry updated successfully', 'success');
 }
 
-function deleteRow(type, index){ 
-  if(!confirm('Delete this entry?')) return; 
-  
-  state.data[type].splice(index, 1); 
+function deleteRow(type, index){
+  if(!confirm('Delete this entry?')) return;
+  state.data[type].splice(index, 1);
   state.metadata.lastModified = new Date().toISOString();
-  renderType(type); 
-  saveSessionAuto(); 
+  renderType(type);
+  saveSessionAuto();
+  pushHistory();
   showNotification('Entry deleted', 'warning');
 }
 
 /* ================ TOTALS & STATUS ================ */
-function updateTotals(){ 
-  const totalNc = sumArray(state.data.nc); 
-  const totalC = sumArray(state.data.c); 
-  const totalNcl = sumArray(state.data.ncl); 
-  const totalCl = sumArray(state.data.cl); 
-  const totalEq = sumArray(state.data.eq); 
-  
-  // Calculate P&L properly: Income - Expenses = Profit/Loss
+function updateTotals(){
+  const totalNc = sumArray(state.data.nc);
+  const totalC = sumArray(state.data.c);
+  const totalNcl = sumArray(state.data.ncl);
+  const totalCl = sumArray(state.data.cl);
+  const totalEq = sumArray(state.data.eq);
+
   const totalIncome = sumPnlByType('income') + sumPnlByType('other_income');
   const totalExpenses = sumPnlByType('expense') + sumPnlByType('finance_cost');
   const netProfitLoss = totalIncome - totalExpenses;
-  
-  document.getElementById('totalNc').textContent = fmt(totalNc); 
+
+  document.getElementById('totalNc').textContent = fmt(totalNc);
   document.getElementById('totalNcM').textContent = fmtMil(totalNc);
-  document.getElementById('totalC').textContent = fmt(totalC); 
+  document.getElementById('totalC').textContent = fmt(totalC);
   document.getElementById('totalCM').textContent = fmtMil(totalC);
-  document.getElementById('totalNcl').textContent = fmt(totalNcl); 
+  document.getElementById('totalNcl').textContent = fmt(totalNcl);
   document.getElementById('totalNclM').textContent = fmtMil(totalNcl);
-  document.getElementById('totalCl').textContent = fmt(totalCl); 
+  document.getElementById('totalCl').textContent = fmt(totalCl);
   document.getElementById('totalClM').textContent = fmtMil(totalCl);
-  document.getElementById('totalEq').textContent = fmt(totalEq); 
+  document.getElementById('totalEq').textContent = fmt(totalEq);
   document.getElementById('totalEqM').textContent = fmtMil(totalEq);
-  
-  // Update P&L totals
+
   document.getElementById('totalIncome').textContent = fmt(totalIncome);
   document.getElementById('totalIncomeM').textContent = fmtMil(totalIncome);
   document.getElementById('totalExpenses').textContent = fmt(totalExpenses);
   document.getElementById('totalExpensesM').textContent = fmtMil(totalExpenses);
-  
+
   const netProfitLossElement = document.getElementById('netProfitLoss');
   const netProfitLossMElement = document.getElementById('netProfitLossM');
-  
   netProfitLossElement.textContent = fmt(netProfitLoss);
   netProfitLossMElement.textContent = fmtMil(netProfitLoss);
-  
-  // Color code profit/loss
   if (netProfitLoss >= 0) {
     netProfitLossElement.className = 'profit';
     netProfitLossMElement.className = 'profit';
@@ -1095,14 +1504,13 @@ function updateTotals(){
     netProfitLossElement.className = 'loss';
     netProfitLossMElement.className = 'loss';
   }
-  
-  // Update statuses for all reported fields
+
   checkReportedStatus('Nc', totalNc);
   checkReportedStatus('C', totalC);
   checkReportedStatus('Ncl', totalNcl);
   checkReportedStatus('Cl', totalCl);
   checkReportedStatus('Eq', totalEq);
-  checkReportedStatus('Pl', netProfitLoss); // Now checking against calculated profit/loss
+  checkReportedStatus('Pl', netProfitLoss);
 }
 
 function sumPnlByType(category) {
@@ -1110,143 +1518,154 @@ function sumPnlByType(category) {
     .filter(item => item.category === category)
     .reduce((sum, item) => sum + (isFinite(item.amount) ? item.amount : 0), 0);
 }
-
 function sumArray(arr) {
-  return arr.reduce((sum, item) => sum + (isFinite(item.amount) ? item.amount : 0), 0);
+  return (arr || []).reduce((sum, item) => sum + (isFinite(item.amount) ? item.amount : 0), 0);
 }
+
+const REPORTED_KEY_MAP = { Nc:'nc', C:'c', Ncl:'ncl', Cl:'cl', Eq:'eq', Pl:'pl', Assets:'assets' };
 
 function checkReportedStatus(prefix, calculatedTotal) {
   const reportedInput = document.getElementById('reported' + prefix);
   const statusElement = document.getElementById('status' + prefix);
-  
   if (!reportedInput || !statusElement) return;
-  
-  const reportedValue = parseFloat(reportedInput.value);
-  
-  // If no value entered, clear status
+
+  const reportedValue = parseFloat(String(reportedInput.value).replace(/,/g, ''));
   if (!isFinite(reportedValue)) {
     statusElement.textContent = '';
     return;
   }
-  
   const difference = reportedValue - calculatedTotal;
   const tolerance = Math.max(1, Math.abs(calculatedTotal)) * settings.tolerancePct;
-  
-  // Determine status and styling
   if (Math.abs(difference) <= tolerance) {
     statusElement.innerHTML = `<span class="ok">✓ Match</span>`;
   } else {
-    statusElement.innerHTML = `<span class="err">✗ Mismatch (${fmt0(difference)})</span>`;
+    statusElement.innerHTML = `<span class="err">✗ Mismatch (${escapeHtml(fmt0(difference))})</span>`;
   }
 }
 
 /* ================ SUMMARY ================ */
-function renderSummary(){ 
-  updateTotals(); 
-  
+function renderSummary(){
+  updateTotals();
+
   const totalAssets = sumArray(state.data.nc) + sumArray(state.data.c);
   const totalLiab = sumArray(state.data.ncl) + sumArray(state.data.cl);
   const totalEq = sumArray(state.data.eq);
-  
-  // Calculate P&L for summary
   const totalIncome = sumPnlByType('income') + sumPnlByType('other_income');
   const totalExpenses = sumPnlByType('expense') + sumPnlByType('finance_cost');
   const netProfitLoss = totalIncome - totalExpenses;
-  
-  // Update summary displays
+
   document.getElementById('summaryAssets').innerHTML = `
-    <div style='display:flex;justify-content:space-between;padding:4px 0'>
-      <div>Non-Current:</div>
-      <div>${fmt(sumArray(state.data.nc))}</div>
-    </div>
-    <div style='display:flex;justify-content:space-between;padding:4px 0'>
-      <div>Current:</div>
-      <div>${fmt(sumArray(state.data.c))}</div>
-    </div>
-    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'>
-      <div><strong>Total:</strong></div>
-      <div><strong>${fmt(totalAssets)}</strong></div>
-    </div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0'><div>Non-Current:</div><div>${fmt(sumArray(state.data.nc))}</div></div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0'><div>Current:</div><div>${fmt(sumArray(state.data.c))}</div></div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'><div><strong>Total:</strong></div><div><strong>${fmt(totalAssets)}</strong></div></div>
   `;
-  
   document.getElementById('summaryLiab').innerHTML = `
-    <div style='display:flex;justify-content:space-between;padding:4px 0'>
-      <div>Non-Current:</div>
-      <div>${fmt(sumArray(state.data.ncl))}</div>
-    </div>
-    <div style='display:flex;justify-content:space-between;padding:4px 0'>
-      <div>Current:</div>
-      <div>${fmt(sumArray(state.data.cl))}</div>
-    </div>
-    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'>
-      <div><strong>Total:</strong></div>
-      <div><strong>${fmt(totalLiab)}</strong></div>
-    </div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0'><div>Non-Current:</div><div>${fmt(sumArray(state.data.ncl))}</div></div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0'><div>Current:</div><div>${fmt(sumArray(state.data.cl))}</div></div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'><div><strong>Total:</strong></div><div><strong>${fmt(totalLiab)}</strong></div></div>
   `;
-  
   document.getElementById('summaryEquity').innerHTML = `
-    <div style='display:flex;justify-content:space-between;padding:4px 0'>
-      <div>Equity:</div>
-      <div>${fmt(totalEq)}</div>
-    </div>
-    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'>
-      <div><strong>Total:</strong></div>
-      <div><strong>${fmt(totalEq)}</strong></div>
-    </div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0'><div>Equity:</div><div>${fmt(totalEq)}</div></div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'><div><strong>Total:</strong></div><div><strong>${fmt(totalEq)}</strong></div></div>
   `;
-  
-  // Update P&L summary with proper calculation
   const profitLossClass = netProfitLoss >= 0 ? 'profit' : 'loss';
   document.getElementById('summaryPnl').innerHTML = `
-    <div style='display:flex;justify-content:space-between;padding:4px 0'>
-      <div>Total Income:</div>
-      <div>${fmt(totalIncome)}</div>
-    </div>
-    <div style='display:flex;justify-content:space-between;padding:4px 0'>
-      <div>Total Expenses:</div>
-      <div>${fmt(totalExpenses)}</div>
-    </div>
-    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'>
-      <div><strong>Net Profit/(Loss):</strong></div>
-      <div class="${profitLossClass}"><strong>${fmt(netProfitLoss)}</strong></div>
-    </div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0'><div>Total Income:</div><div>${fmt(totalIncome)}</div></div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0'><div>Total Expenses:</div><div>${fmt(totalExpenses)}</div></div>
+    <div style='display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px'><div><strong>Net Profit/(Loss):</strong></div><div class="${profitLossClass}"><strong>${fmt(netProfitLoss)}</strong></div></div>
   `;
-  
-  // Update main totals
+
   document.getElementById('totalAssets').textContent = fmt(totalAssets);
   document.getElementById('totalAssetsM').textContent = fmtMil(totalAssets);
   document.getElementById('totalLiab').textContent = fmt(totalLiab);
   document.getElementById('totalLiabM').textContent = fmtMil(totalLiab);
-  
+
   const netAssets = totalAssets - totalLiab;
   document.getElementById('netAssets').textContent = fmt(netAssets);
   document.getElementById('netAssetsM').textContent = fmtMil(netAssets);
-  
-  // Update ratios
+
   const currentAssets = sumArray(state.data.c);
   const currentLiab = sumArray(state.data.cl);
   const currentRatio = currentLiab !== 0 ? (currentAssets / currentLiab).toFixed(2) : '-';
   const debtAssetRatio = totalAssets !== 0 ? (totalLiab / totalAssets).toFixed(2) : '-';
   const netAssetRatio = totalAssets !== 0 ? (netAssets / totalAssets).toFixed(2) : '-';
-  
+
   document.getElementById('currentRatio').textContent = currentRatio;
   document.getElementById('debtAssetRatio').textContent = debtAssetRatio;
   document.getElementById('netAssetRatio').textContent = netAssetRatio;
-  
-  // Update quick casting view
+
   document.getElementById('qcTotalAssets').textContent = fmt(totalAssets);
   document.getElementById('qcTotalLiab').textContent = fmt(totalLiab);
   document.getElementById('qcNetAssets').textContent = fmt(netAssets);
-  
-  const view = document.getElementById('summaryView').value; 
-  document.getElementById('quickCasting').style.display = view === 'quick' ? 'block' : 'none'; 
-  document.getElementById('detailedSummary').style.display = view === 'quick' ? 'none' : 'grid'; 
+
+  const view = document.getElementById('summaryView').value;
+  document.getElementById('quickCasting').style.display = view === 'quick' ? 'block' : 'none';
+  document.getElementById('detailedSummary').style.display = view === 'quick' ? 'none' : 'grid';
+
+  renderChart();
+}
+
+function renderChart(){
+  const canvas = document.getElementById('overviewChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const cssW = rect.width || 800;
+  const cssH = 240;
+  if (canvas.width !== Math.floor(cssW*dpr) || canvas.height !== Math.floor(cssH*dpr)) {
+    canvas.width = Math.floor(cssW*dpr);
+    canvas.height = Math.floor(cssH*dpr);
+  }
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,cssW,cssH);
+
+  const totalAssets = sumArray(state.data.nc) + sumArray(state.data.c);
+  const totalLiab = sumArray(state.data.ncl) + sumArray(state.data.cl);
+  const totalEq = sumArray(state.data.eq);
+  const totalIncome = sumPnlByType('income') + sumPnlByType('other_income');
+  const totalExpenses = sumPnlByType('expense') + sumPnlByType('finance_cost');
+
+  const labels = ['Assets','Liabilities','Equity','Income','Expenses'];
+  const values = [totalAssets, totalLiab, totalEq, totalIncome, totalExpenses];
+  const colors = ['#2b3a67','#ef4444','#10b981','#f59e0b','#6b7280'];
+  const max = Math.max(1, ...values.map(v => Math.abs(v)));
+  const barW = Math.min(70, (cssW - 80) / labels.length);
+  const gap = 18;
+  const startX = 40;
+  const baseY = cssH - 40;
+  const chartH = cssH - 70;
+
+  const muted = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#6b7280';
+  const text = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#111';
+
+  ctx.strokeStyle = muted;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(30, 20);
+  ctx.lineTo(30, baseY);
+  ctx.lineTo(cssW - 20, baseY);
+  ctx.stroke();
+
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'center';
+  labels.forEach((lab, i) => {
+    const v = values[i];
+    const barH = (Math.abs(v) / max) * chartH;
+    const x = startX + i * (barW + gap);
+    const y = baseY - barH;
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(x, y, barW, barH);
+    ctx.fillStyle = text;
+    ctx.fillText(lab, x + barW / 2, baseY + 14);
+    ctx.fillText(fmt0(v).replace(/^[A-Z]{2,3}\s/, ''), x + barW / 2, Math.max(12, y - 4));
+  });
 }
 
 /* ================ SESSION MANAGEMENT ================ */
-function saveSessionAuto(){ 
-  try { 
-    localStorage.setItem('audit_casting_v1', JSON.stringify(state)); 
+function saveSessionAuto(){
+  try {
+    localStorage.setItem('audit_casting_v1', JSON.stringify(state));
   } catch(e) {
     console.error('Failed to save session locally:', e);
   }
@@ -1254,19 +1673,16 @@ function saveSessionAuto(){
 
 function saveSessionAsJSON() {
   try {
-    // Update metadata
     state.metadata.lastModified = new Date().toISOString();
     state.metadata.totalEntries = Object.values(state.data).reduce((sum, arr) => sum + arr.length, 0);
-    
-    // Create a more descriptive filename
+
     const date = new Date().toISOString().split('T')[0];
     const totalAssets = sumArray(state.data.nc) + sumArray(state.data.c);
     const filename = `audit-report-${date}-${fmt0(totalAssets).replace(/[^\d]/g, '')}.json`;
-    
-    // Create and download JSON file
+
     const dataStr = JSON.stringify(state, null, 2);
     const dataBlob = new Blob([dataStr], {type: 'application/json'});
-    
+
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
@@ -1275,7 +1691,7 @@ function saveSessionAsJSON() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    
+
     showNotification('Session saved as JSON file', 'success');
   } catch (error) {
     showNotification('Error saving JSON file: ' + error.message, 'error');
@@ -1285,246 +1701,270 @@ function saveSessionAsJSON() {
 function loadSessionFromJSON() {
   const input = document.createElement('input');
   input.type = 'file';
-  input.accept = '.json';
-  
+  input.accept = '.json,application/json';
+
   input.onchange = e => {
     const file = e.target.files[0];
     if (!file) return;
-    
+
     const reader = new FileReader();
     reader.onload = event => {
       try {
         const loadedState = JSON.parse(event.target.result);
-        
-        // Validate the loaded data structure
-        if (!loadedState.data || !loadedState.currency) {
+        if (!loadedState || !loadedState.data) {
           throw new Error('Invalid file format');
         }
-        
-        // Ensure all required data arrays exist
-        const requiredArrays = ['nc', 'c', 'ncl', 'cl', 'eq', 'pl'];
-        requiredArrays.forEach(key => {
-          if (!Array.isArray(loadedState.data[key])) {
-            loadedState.data[key] = [];
-          }
-        });
-        
         state = loadedState;
+        normalizeState();
+        populateCategorySelects();
+        syncReportedInputs();
         renderAll();
-        saveSessionAuto(); // Save to localStorage as backup
-        
-        // Show session info
+        applyTheme(state.theme);
+        document.getElementById('themeSelect').value = state.theme;
+        document.getElementById('currencySelect').value = state.currency;
+        document.getElementById('standardSelect').value = state.standard;
+              applyLanguage(state.lang);
+        saveSessionAuto();
+
         const created = new Date(state.metadata.created).toLocaleDateString();
-        const entries = Object.values(state.data).reduce((sum, arr) => sum + arr.length, 0);
+        const entries = Object.values(state.data).reduce((sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0), 0);
         showNotification(`Session loaded (${entries} entries, created: ${created})`, 'success');
+        pushHistory();
       } catch (error) {
         showNotification('Error loading JSON file: ' + error.message, 'error');
       }
     };
-    
     reader.readAsText(file);
   };
-  
   input.click();
 }
 
-function clearAll(){ 
-  if(!confirm('Clear all data? This cannot be undone.')) return; 
-  
-  state.data = { 
-    nc:[], 
-    c:[], 
-    ncl:[], 
-    cl:[], 
-    eq:[], 
-    pl:[] 
-  };
-  
+function clearAll(){
+  if(!confirm('Clear all data? This cannot be undone.')) return;
+  state.data = { nc:[], c:[], ncl:[], cl:[], eq:[], pl:[] };
+  state.reported = { nc:'', c:'', ncl:'', cl:'', eq:'', pl:'', assets:'' };
+  state.reportTitle = '';
   state.metadata = {
     created: new Date().toISOString(),
     lastModified: new Date().toISOString(),
     version: '1.0'
   };
-  
-  // Clear all reported input fields
-  ['reportedNc', 'reportedC', 'reportedNcl', 'reportedCl', 'reportedEq', 'reportedPl', 'reportedAssets'].forEach(id => {
+
+  ['reportedNc','reportedC','reportedNcl','reportedCl','reportedEq','reportedPl','reportedAssets'].forEach(id => {
     const element = document.getElementById(id);
     if (element) element.value = '';
   });
-  
-  renderAll(); 
-  localStorage.removeItem('audit_casting_v1'); 
+  const rt = document.getElementById('reportTitle');
+  if (rt) rt.value = '';
+
+  renderAll();
+  syncReportedInputs();
+  pushHistory();
+  localStorage.removeItem('audit_casting_v1');
   showNotification('All data cleared', 'warning');
 }
 
 /* ================ EXPORT/IMPORT ================ */
-function exportCSV(){ 
-  const rows = [['type,category,amount']]; 
-  Object.keys(state.data).forEach(type => { 
+function csvEscape(v){
+  const s = String(v);
+  if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+
+function exportCSV(){
+  const rows = [['type','category','amount'].map(csvEscape).join(',')];
+  Object.keys(state.data).forEach(type => {
     state.data[type].forEach(r => {
-      rows.push([type, r.category, r.amount]); 
-    }); 
-  }); 
-  
-  const csv = rows.map(r => r.join(',')).join('\n'); 
-  const blob = new Blob([csv], {type:'text/csv'}); 
-  const url = URL.createObjectURL(blob); 
-  const a = document.createElement('a'); 
-  a.href = url; 
-  a.download = 'audit_casting.csv'; 
-  a.click(); 
-  URL.revokeObjectURL(url); 
-  
+      rows.push([csvEscape(type), csvEscape(r.category), csvEscape(r.amount)].join(','));
+    });
+  });
+
+  const csv = rows.join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'audit_casting.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
   showNotification('Data exported to CSV', 'success');
 }
 
-function importCSV(){ 
-  const input = document.createElement('input'); 
-  input.type = 'file'; 
-  input.accept = '.csv'; 
-  
-  input.onchange = e => { 
-    const file = e.target.files[0]; 
-    if(!file) return; 
-    
-    const reader = new FileReader(); 
-    reader.onload = event => { 
+function parseCSV(text){
+  const rows = [];
+  let row = [];
+  let cur = '';
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (text[i+1] === '"') { cur += '"'; i++; }
+        else inQuotes = false;
+      } else cur += ch;
+    } else {
+      if (ch === '"') inQuotes = true;
+      else if (ch === ',') { row.push(cur); cur = ''; }
+      else if (ch === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
+      else if (ch === '\r') { /* skip */ }
+      else cur += ch;
+    }
+  }
+  if (cur !== '' || row.length > 0) { row.push(cur); rows.push(row); }
+  return rows;
+}
+
+function importCSV(){
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.csv,text/csv';
+
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+    reader.onload = event => {
       try {
-        const text = event.target.result; 
-        const lines = text.trim().split('\n'); 
-        
-        // Clear existing data
+        const text = event.target.result;
+        const rows = parseCSV(text);
         state.data = { nc:[], c:[], ncl:[], cl:[], eq:[], pl:[] };
-        
-        lines.forEach((line, index) => {
-          if(index === 0) return; // Skip header
-          
-          const cols = line.split(','); 
-          if(cols.length >= 3) {
-            const type = cols[0];
-            const category = cols[1];
-            const amount = parseFloat(cols[2]);
-            
-            if(state.data[type] && isFinite(amount)) {
-              state.data[type].push({category, amount});
-            }
+        let count = 0;
+        rows.forEach((cols, index) => {
+          if (index === 0 && cols[0] && cols[0].toLowerCase() === 'type') return;
+          if (cols.length < 3) return;
+          const type = String(cols[0]).trim();
+          const category = String(cols[1]).trim();
+          const amount = parseFloat(cols[2]);
+          if (state.data[type] && isFinite(amount)) {
+            state.data[type].push({category, amount});
+            count++;
           }
         });
-        
-        renderAll(); 
-        showNotification('CSV imported successfully', 'success');
+
+        state.metadata.lastModified = new Date().toISOString();
+        normalizeState();
+        renderAll();
+        syncReportedInputs();
+        saveSessionAuto();
+        pushHistory();
+        showNotification(`CSV imported successfully (${count} entries)`, 'success');
       } catch(error) {
         showNotification('Error importing CSV: ' + error.message, 'error');
       }
-    }; 
-    
-    reader.readAsText(file); 
-  }; 
-  
-  input.click(); 
+    };
+    reader.readAsText(file);
+  };
+  input.click();
 }
 
 /* ================ THEMES ================ */
-function applyTheme(name){ 
+function applyTheme(name){
   const themes = {
     professional: {
-      '--bg':'#f5f7fb',
-      '--panel':'#fff',
-      '--accent':'#2b3a67',
-      '--accent2':'#1f2b4a',
-      '--text':'#111827',
-      '--muted':'#6b7280'
+      '--bg':'#f5f7fb','--panel':'#ffffff','--panel-2':'#f1f5f9','--accent':'#2b3a67','--accent-2':'#1f2b4a',
+      '--text':'#111827','--muted':'#6b7280','--success':'#10b981','--warning':'#f59e0b','--error':'#ef4444',
+      '--border':'#e5e7eb','--input-bg':'#ffffff','--table-head-bg':'#f1f5f9','--table-head-text':'#2b3a67',
+      '--stat-bg':'#fbfbff','--quick-bg':'#ffffff','--chart-bg':'#ffffff','--placeholder-bg':'#f1f5f9',
+      '--secondary-btn-bg':'#f1f5f9','--secondary-btn-hover':'#e2e8f0'
     },
     calm: {
-      '--bg':'#f0f7fb',
-      '--panel':'#fff',
-      '--accent':'#6fb3d2',
-      '--accent2':'#5aa6c6',
-      '--text':'#203647',
-      '--muted':'#4f6d7a'
+      '--bg':'#f0f7fb','--panel':'#ffffff','--panel-2':'#eaf3f8','--accent':'#4a90b8','--accent-2':'#3a7fa6',
+      '--text':'#1f3344','--muted':'#4f6d7a','--success':'#10b981','--warning':'#f59e0b','--error':'#ef4444',
+      '--border':'#d7e3ec','--input-bg':'#ffffff','--table-head-bg':'#eaf3f8','--table-head-text':'#1f3344',
+      '--stat-bg':'#f3f9fc','--quick-bg':'#ffffff','--chart-bg':'#ffffff','--placeholder-bg':'#eaf3f8',
+      '--secondary-btn-bg':'#eaf3f8','--secondary-btn-hover':'#d7e3ec'
     },
     happy: {
-      '--bg':'#fffbe6',
-      '--panel':'#fff',
-      '--accent':'#ffd54f',
-      '--accent2':'#ffca28',
-      '--text':'#2b2b2b',
-      '--muted':'#555'
+      '--bg':'#fffbe6','--panel':'#ffffff','--panel-2':'#fff3c4','--accent':'#d9a404','--accent-2':'#c49200',
+      '--text':'#2b2b2b','--muted':'#5a5230','--success':'#10b981','--warning':'#f59e0b','--error':'#ef4444',
+      '--border':'#f0e2a8','--input-bg':'#ffffff','--table-head-bg':'#fff3c4','--table-head-text':'#2b2b2b',
+      '--stat-bg':'#fff7d6','--quick-bg':'#ffffff','--chart-bg':'#ffffff','--placeholder-bg':'#fff3c4',
+      '--secondary-btn-bg':'#fff3c4','--secondary-btn-hover':'#f0e2a8'
     },
     dark: {
-      '--bg':'#0f1724',
-      '--panel':'#0b1220',
-      '--accent':'#1f2937',
-      '--accent2':'#111827',
-      '--text':'#e6eef8',
-      '--muted':'#9aa4b2'
+      '--bg':'#0b1220','--panel':'#111827','--panel-2':'#1f2937','--accent':'#3b82f6','--accent-2':'#2563eb',
+      '--text':'#f1f5f9','--muted':'#94a3b8','--success':'#34d399','--warning':'#fbbf24','--error':'#f87171',
+      '--border':'#334155','--input-bg':'#0f172a','--table-head-bg':'#1f2937','--table-head-text':'#f1f5f9',
+      '--stat-bg':'#1e293b','--quick-bg':'#1e293b','--chart-bg':'#1e293b','--placeholder-bg':'#1f2937',
+      '--secondary-btn-bg':'#1f2937','--secondary-btn-hover':'#334155'
     }
-  }; 
-  
-  const theme = themes[name] || themes.professional; 
+  };
+  const theme = themes[name] || themes.professional;
   Object.keys(theme).forEach(key => {
     document.documentElement.style.setProperty(key, theme[key]);
   });
-  
   settings.mood = name;
 }
 
 /* ================ UTILITIES ================ */
+function formatAmountString(str){
+  if (str === null || str === undefined) return '';
+  let s = String(str).trim();
+  if (s === '') return '';
+  // keep digits and decimal point
+  s = s.replace(/[^0-9.]/g, '');
+  if (s === '') return '';
+  const parts = s.split('.');
+  let intPart = parts[0];
+  const decPart = parts.length > 1 ? parts.slice(1).join('') : null;
+  // remove leading zeros (but keep single zero)
+  if (intPart.length > 1) intPart = intPart.replace(/^0+/, '') || '0';
+  const formattedInt = intPart === '' ? '' : Number(intPart).toLocaleString('en-US');
+  if (decPart === null) return formattedInt;
+  return (formattedInt === '' ? '0' : formattedInt) + '.' + decPart;
+}
+
 function showNotification(message, type) {
+  let container = document.getElementById('notifContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'notifContainer';
+    container.style.cssText = 'position:fixed;top:20px;right:20px;z-index:1000;display:flex;flex-direction:column;gap:8px;max-width:320px;';
+    document.body.appendChild(container);
+  }
   const notification = document.createElement('div');
   notification.textContent = message;
   notification.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 12px 16px;
-    border-radius: 6px;
-    color: white;
-    font-weight: 500;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: opacity 0.3s ease;
-    opacity: 0;
+    padding:12px 16px;
+    border-radius:6px;
+    color:#fff;
+    font-weight:500;
+    box-shadow:0 4px 6px rgba(0,0,0,0.1);
+    transition:opacity 0.3s ease, transform 0.3s ease;
+    opacity:0;
+    transform:translateX(20px);
   `;
-  
-  if (type === 'success') {
-    notification.style.backgroundColor = '#10b981';
-  } else if (type === 'error') {
-    notification.style.backgroundColor = '#ef4444';
-  } else if (type === 'warning') {
-    notification.style.backgroundColor = '#f59e0b';
-  }
-  
-  document.body.appendChild(notification);
-  
-  // Animate in
-  setTimeout(() => notification.style.opacity = '1', 10);
-  
-  // Animate out and remove
+  if (type === 'success') notification.style.backgroundColor = '#10b981';
+  else if (type === 'error') notification.style.backgroundColor = '#ef4444';
+  else if (type === 'warning') notification.style.backgroundColor = '#f59e0b';
+  else notification.style.backgroundColor = '#2b3a67';
+
+  container.appendChild(notification);
+  requestAnimationFrame(() => { notification.style.opacity = '1'; notification.style.transform = 'translateX(0)'; });
+
   setTimeout(() => {
     notification.style.opacity = '0';
-    setTimeout(() => {
-      if (notification.parentNode) {
-        document.body.removeChild(notification);
-      }
-    }, 300);
+    notification.style.transform = 'translateX(20px)';
+    setTimeout(() => { if (notification.parentNode) notification.parentNode.removeChild(notification); }, 300);
   }, 3000);
 }
 
-function checkCasting(){ 
-  const reported = parseFloat(document.getElementById('reportedAssets').value);
+function checkCasting(){
+  const reported = parseFloat(String(document.getElementById('reportedAssets').value).replace(/,/g, ''));
   const actual = sumArray(state.data.nc) + sumArray(state.data.c);
   const result = document.getElementById('castResult');
-  
-  if(!isFinite(reported)){ 
-    result.textContent = 'Enter a valid amount'; 
-    result.className = 'err'; 
-    return; 
-  } 
-  
+
+  if(!isFinite(reported)){
+    result.textContent = 'Enter a valid amount';
+    result.className = 'err';
+    return;
+  }
   const difference = reported - actual;
   const tolerance = Math.max(1, Math.abs(actual)) * settings.tolerancePct;
-  
   if(Math.abs(difference) <= tolerance) {
     result.textContent = '✓ Casting OK';
     result.className = 'ok';
@@ -1535,6 +1975,16 @@ function checkCasting(){
 }
 
 /* ================ INITIALIZATION ================ */
+function syncReportedInputs(){
+  const inputMap = { nc:'reportedNc', c:'reportedC', ncl:'reportedNcl', cl:'reportedCl', eq:'reportedEq', pl:'reportedPl', assets:'reportedAssets' };
+  Object.keys(inputMap).forEach(k => {
+    const el = document.getElementById(inputMap[k]);
+    if (el) el.value = (state.reported && state.reported[k] !== undefined) ? state.reported[k] : '';
+  });
+  const rt = document.getElementById('reportTitle');
+  if (rt) rt.value = state.reportTitle || '';
+}
+
 function attachEnterHandlers() {
   const inputMappings = [
     { input: 'ncAmount', type: 'nc', category: 'ncCategory' },
@@ -1544,27 +1994,35 @@ function attachEnterHandlers() {
     { input: 'eqAmount', type: 'eq', category: 'eqCategory' },
     { input: 'plAmount', type: 'pl', category: 'plCategory' }
   ];
-  
+
   inputMappings.forEach(mapping => {
     const input = document.getElementById(mapping.input);
+    input.addEventListener('input', () => {
+      const formatted = formatAmountString(input.value);
+      if (formatted !== input.value) {
+        const pos = input.selectionStart;
+        const oldLen = input.value.length;
+        input.value = formatted;
+        const newLen = formatted.length;
+        input.selectionStart = input.selectionEnd = Math.max(0, pos + (newLen - oldLen));
+      }
+    });
     input.addEventListener('keydown', e => {
       if(e.key === 'Enter') {
         const category = document.getElementById(mapping.category).value;
-        const value = parseFloat(input.value);
-        
+        const value = parseFloat(String(input.value).replace(/,/g, ''));
         if(!isFinite(value) || value <= 0) {
           showNotification('Please enter a valid amount', 'error');
           return;
         }
-        
         addTo(mapping.type, category, value);
-        // Input is cleared in the addTo function
       }
     });
   });
 }
 
 function renderAll() {
+  syncReportedInputs();
   renderType('nc');
   renderType('c');
   renderType('ncl');
@@ -1577,9 +2035,11 @@ function renderAll() {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  // Set up event listeners
+  normalizeState();
+  populateCategorySelects();
+
   attachEnterHandlers();
-  
+
   document.getElementById('btnSave').addEventListener('click', saveSessionAsJSON);
   document.getElementById('btnLoad').addEventListener('click', loadSessionFromJSON);
   document.getElementById('btnClear').addEventListener('click', clearAll);
@@ -1587,42 +2047,149 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('btnImportCSV').addEventListener('click', importCSV);
   document.getElementById('btnCheckCast').addEventListener('click', checkCasting);
   document.getElementById('btnPrint').addEventListener('click', () => window.print());
-  
-  // Summary view handler
+  document.getElementById('btnStandards').addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+    const t = document.getElementById('tabStandards');
+    t.classList.add('active'); t.setAttribute('aria-selected','true');
+    Object.values(tabs).forEach(v => document.getElementById(v).style.display = 'none');
+    document.getElementById('panelStandards').style.display = 'block';
+    document.getElementById('panelStandards').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  const settingsPanel = document.getElementById('settingsPanel');
+  document.getElementById('btnSettings').addEventListener('click', () => {
+    if (settingsPanel) settingsPanel.style.display = (settingsPanel.style.display === 'none' || settingsPanel.style.display === '') ? 'block' : 'none';
+  });
+  document.getElementById('btnUndo').addEventListener('click', undo);
+  document.getElementById('btnRedo').addEventListener('click', redo);
+
   document.getElementById('summaryView').addEventListener('change', renderSummary);
-  
-  // Theme handler
+
   document.getElementById('themeSelect').addEventListener('change', e => {
     applyTheme(e.target.value);
+    state.theme = e.target.value;
+    settings.mood = e.target.value;
+    saveSessionAuto();
+    pushHistory();
   });
-  
-  // Set up real-time checking for reported fields
-  ['reportedNc', 'reportedC', 'reportedNcl', 'reportedCl', 'reportedEq', 'reportedPl', 'reportedAssets'].forEach(id => {
+
+  document.getElementById('standardSelect').addEventListener('change', e => {
+    state.standard = e.target.value;
+    populateCategorySelects();
+    renderAll();
+    saveSessionAuto();
+    pushHistory();
+    showNotification('Standard changed to ' + state.standard, 'success');
+  });
+
+  function setLang(lang){
+    state.lang = lang;
+    const before = document.getElementById('panelStandards').innerHTML.length;
+    applyLanguage(lang);
+    const after = document.getElementById('panelStandards').innerHTML.length;
+    saveSessionAuto();
+    pushHistory();
+    showNotification('Language: ' + (lang === 'bm' ? 'BM' : 'ENG') + ' (' + before + '->' + after + ')', 'success');
+  }
+  document.getElementById('btnLangEn').addEventListener('click', () => setLang('en'));
+  document.getElementById('btnLangMy').addEventListener('click', () => setLang('bm'));
+
+  document.getElementById('currencySelect').addEventListener('change', e => {
+    state.currency = e.target.value;
+    settings.currency = e.target.value;
+    renderAll();
+    saveSessionAuto();
+    pushHistory();
+    showNotification('Currency changed to ' + state.currency, 'success');
+  });
+
+  // Reported fields: update state + totals
+  const reportedIds = ['reportedNc','reportedC','reportedNcl','reportedCl','reportedEq','reportedPl','reportedAssets'];
+  reportedIds.forEach(id => {
     const element = document.getElementById(id);
     if (element) {
-      element.addEventListener('input', updateTotals);
+      element.addEventListener('input', () => {
+        const key = id === 'reportedAssets' ? 'assets' : id.replace('reported','').toLowerCase();
+        const formatted = formatAmountString(element.value);
+        if (formatted !== element.value) {
+          const pos = element.selectionStart;
+          const oldLen = element.value.length;
+          element.value = formatted;
+          const newLen = formatted.length;
+          element.selectionStart = element.selectionEnd = Math.max(0, pos + (newLen - oldLen));
+        }
+        state.reported[key] = element.value;
+        updateTotals();
+        saveSessionAuto();
+      });
+      element.addEventListener('focus', () => pushHistory());
+      element.addEventListener('blur', () => pushHistory());
     }
   });
-  
+
+  const reportTitleEl = document.getElementById('reportTitle');
+  if (reportTitleEl) {
+    reportTitleEl.addEventListener('input', () => {
+      state.reportTitle = reportTitleEl.value;
+      saveSessionAuto();
+    });
+    reportTitleEl.addEventListener('focus', () => pushHistory());
+    reportTitleEl.addEventListener('blur', () => pushHistory());
+  }
+
   // Load saved session if exists
   const savedSession = localStorage.getItem('audit_casting_v1');
   if (savedSession) {
     try {
       state = JSON.parse(savedSession);
+      normalizeState();
       renderAll();
       showNotification('Previous session loaded automatically', 'success');
     } catch(e) {
       console.error('Error loading saved session:', e);
+      normalizeState();
+      renderAll();
     }
+  } else {
+    renderAll();
   }
-  
-  // Apply initial theme
-  applyTheme(settings.mood);
-  document.getElementById('themeSelect').value = settings.mood;
-  
-  // Initialize UI
-  updateTotals();
-  renderSummary();
+
+  // Apply initial theme & currency
+  applyTheme(state.theme);
+  document.getElementById('themeSelect').value = state.theme;
+  document.getElementById('currencySelect').value = state.currency;
+  window.standardsInfoEN = document.getElementById('panelStandards').innerHTML;
+  document.getElementById('standardSelect').value = state.standard;
+  applyLanguage(state.lang);
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === 's') { e.preventDefault(); saveSessionAsJSON(); }
+      else if (e.key === 'o') { e.preventDefault(); loadSessionFromJSON(); }
+      else if (e.key === 'z') { e.preventDefault(); if (e.shiftKey) redo(); else undo(); }
+      else if (e.key === 'y') { e.preventDefault(); redo(); }
+      else if (e.key === 'p') { e.preventDefault(); window.print(); }
+    }
+  });
+
+  // Chart redraw on resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { if (document.getElementById('panelSummary').style.display !== 'none') renderChart(); }, 150);
+  });
+
+  // Initial history snapshot
+  pushHistory();
+  updateUndoRedoButtons();
+
+  // Deep-link via hash (for screenshots/docs)
+  const hash = (location.hash || '').replace('#','');
+  if (hash && tabs[hash]) {
+    const el = document.getElementById(hash);
+    if (el) el.click();
+  }
 });
 </script>
 </body>
